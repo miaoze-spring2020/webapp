@@ -13,7 +13,7 @@ version: 2
           command: echo "compile"
       - run:
           name: unit test
-          command: echo "unit test"
+          command: echo "unit test!"
 
 workflows:
   version: 2
