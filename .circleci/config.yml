@@ -1,13 +1,13 @@
 version: 2
- jobs:
-   build:
-     docker:
+  jobs:
+    build:
+      docker:
        - image: circleci/ruby:2.4.1
-     steps:
+      steps:
        - checkout
        - run: echo "A first hello"
-  pr_check:
-    steps:
+   pr_check:
+     steps:
       - run:
           name: compile
           command: echo "compile"
