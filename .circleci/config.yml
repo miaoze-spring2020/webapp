@@ -7,14 +7,16 @@ jobs:
       - checkout
       - run: echo "A first hello"
   pr_check:
+    docker:
+      - image: ubuntu:18.04
     steps:
       - run:
           name: compile
-          command: |
-            echo 'compile'
+          command: echo 'compile'
       - run:
           name: unit test
           command: echo 'unit test'
+      
 
 workflows:
   version: 2
