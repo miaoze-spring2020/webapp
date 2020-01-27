@@ -1,3 +1,20 @@
+version: 2.1
+jobs:
+  build:
+    steps:
+    - checkout
+    - run:
+        name: build-repo
+        command: echo "build"
+  pr_check:
+    steps:
+    - run:
+        name: compile
+        command: echo "compile"
+    - run:
+        name: unit test
+        command: echo "unit test"
+
 workflows:
   version: 2
   pr-check-workflow:
