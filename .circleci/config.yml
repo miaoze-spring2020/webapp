@@ -1,8 +1,12 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image:circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "Hello World"
+workflows:
+  version: 2
+  pr-check-workflow:
+    jobs:
+      - pr_check
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
