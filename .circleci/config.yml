@@ -12,3 +12,16 @@ jobs:
       - run:
           name: Testing application
           command: java -cp RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
+          
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+  pr-check-workflow:
+    jobs:
+      - pr_check
