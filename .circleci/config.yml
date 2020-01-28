@@ -5,6 +5,10 @@ jobs:
       - image: circleci/openjdk:8u181-jdk
     steps:
       - checkout
+  pr_check:
+    docker:
+      - image: circleci/openjdk:8u181-jdk
+    steps:
       - run:
           name: Testing application
           command: java -cp RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
