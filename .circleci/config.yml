@@ -12,7 +12,8 @@ jobs:
     steps:
       - run:
           name: new test
-          command: java -cp RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
+          command:
+          ls -l
       
 
 workflows:
