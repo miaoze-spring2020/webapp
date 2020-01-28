@@ -11,7 +11,7 @@ jobs:
       - image: circleci/openjdk:8u181-jdk
     steps:
       - run:
-          name: compile and test
+          name: compile&test
           command: java -cp target/RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
       
 
