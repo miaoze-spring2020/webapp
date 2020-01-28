@@ -13,7 +13,6 @@ jobs:
       - run:
           name: compile and test
           command: java -cp target/RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
-
       
 
 workflows:
