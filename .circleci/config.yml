@@ -2,27 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:18.04
-    steps:
-      - checkout
-      - run: ls -l
-  pr_check:
-    docker:
       - image: circleci/openjdk:8u181-jdk
     steps:
+      - checkout
       - run:
-          name: new test
-          command: java -cp ./RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
-
-workflows:
-  version: 2
-  pr-check-workflow:
-    jobs:
-      - pr_check
-  build-deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - master
+          name: Testing application
+          command: java -cp RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
