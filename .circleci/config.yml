@@ -2,20 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: ubuntu:18.04
     steps:
       - checkout
       - run: echo "A first hello"
   pr_check:
     docker:
-      - image: ubuntu:18.04
+      - image: circleci/openjdk:8u181-jdk
     steps:
       - run:
-          name: compile
-          command: echo 'compile'
-      - run:
-          name: unit test
-          command: echo 'unit test'
+          name: compile and test
+          command: java -cp target/RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
       
 
 workflows:
