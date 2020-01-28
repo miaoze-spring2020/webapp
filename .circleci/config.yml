@@ -1,23 +1,19 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: alpine:3.7
+      - image: ubuntu:18.04
     steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+      - checkout
+      - run: echo "A first hello"
   pr_check:
+    docker:
+      - image: circleci/openjdk:8u181-jdk
     steps:
       - run:
-          name: compile
-          command: |
-            echo 'compile'
-      - run:
-          name: unit test
-          command: echo 'unit test'
+          name: compile and test
+          command: java -cp target/RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
+
       
 
 workflows:
