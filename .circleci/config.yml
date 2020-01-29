@@ -1,25 +1,21 @@
-version: 2.1
+version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/openjdk:8u181-jdk
     steps:
-    - checkout
-    - run:
-        name: build-repo
-        command: echo "build"
+      - checkout
   pr_check:
+    docker:
+      - image: circleci/openjdk:8u181-jdk
     steps:
-    - run:
-        name: compile
-        command: echo "compile"
-    - run:
-        name: unit test
-        command: echo "unit test"
-
+      - checkout
+      - run:
+          name: Testing application
+          command: java -cp RunUt-1.0-SNAPSHOT-jar-with-dependencies.jar org.junit.runner.JUnitCore TestClass
+          
 workflows:
   version: 2
-  pr-check-workflow:
-    jobs:
-      - pr_check
   build-deploy:
     jobs:
       - build:
@@ -27,3 +23,6 @@ workflows:
             branches:
               only:
                 - master
+  pr-check-workflow:
+    jobs:
+      - pr_check
