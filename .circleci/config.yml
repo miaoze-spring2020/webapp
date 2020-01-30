@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/RunUt
     docker:
       - image: circleci/openjdk:8-jdk-stretch
 
@@ -36,7 +37,7 @@ jobs:
       - run:
           name: compile
           command: |
-            cd /RunUt
+            cd webapp/RunUt
             mvn compile
       - run:
           name: test
