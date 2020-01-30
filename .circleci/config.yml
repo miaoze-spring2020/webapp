@@ -39,6 +39,7 @@ jobs:
           name: compile
           command: |
             pwd
+            ls
       - run:
           name: test
           command: |
@@ -46,13 +47,13 @@ jobs:
 
 workflows:
   version: 2
-  build-deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - master
+#   build-deploy:
+#     jobs:
+#       - build:
+#           filters:
+#             branches:
+#               only:
+#                 - master
   pr-check-workflow:
     jobs:
       - pr_check
