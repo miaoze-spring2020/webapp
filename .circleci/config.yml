@@ -30,7 +30,7 @@ jobs:
           path: target/surefire-reports
           
   pr_check:
-    working_directory: ~/project
+    working_directory: ~/project/RunUt
     docker:
       - image: circleci/openjdk:8-jdk-stretch
     steps:
@@ -38,7 +38,6 @@ jobs:
       - run:
           name: compile
           command: |
-            cd RunUt
             pwd
       - run:
           name: test
