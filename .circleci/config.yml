@@ -33,7 +33,7 @@ jobs:
           
   pr_check:
     docker:
-      - image: circleci/openjdk:11-jdk-stretch
+      - image: ubuntu18.04
     steps:
       - checkout
       - run:
@@ -46,7 +46,7 @@ jobs:
             echo "try all tests"
 
 workflows:
-#   version: 2
+  version: 2
 #   build-deploy:
 #     jobs:
 #       - build:
