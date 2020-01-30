@@ -6,7 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="" />
+    <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +26,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -34,6 +45,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1X2PLkl3Wr9eySpfzb81AfzPp3L" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -41,9 +53,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../helloworld" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.21149425" />
@@ -55,12 +68,51 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.301">
-    <configuration name="TestClass.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ControllerTest.testGetUser">
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RunUt" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestClass" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.testAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
+      <option name="METHOD_NAME" value="testAuthorization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.testCreateBill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
+      <option name="METHOD_NAME" value="testCreateBill" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.testGetBills" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
+      <option name="METHOD_NAME" value="testGetBills" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.testGetUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
+      <option name="METHOD_NAME" value="testGetUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -139,12 +191,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.TestClass.test" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
+      <item itemvalue="JUnit.ControllerTest.testAuthorization" />
+      <item itemvalue="JUnit.ControllerTest.testCreateBill" />
+      <item itemvalue="JUnit.ControllerTest.testGetBills" />
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.ControllerTest.testGetUser" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestClass.test" />
+        <item itemvalue="JUnit.ControllerTest.testGetUser" />
+        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.ControllerTest.testCreateBill" />
+        <item itemvalue="JUnit.ControllerTest.testGetBills" />
+        <item itemvalue="JUnit.ControllerTest.testAuthorization" />
       </list>
     </recent_temporary>
   </component>
@@ -183,11 +243,48 @@
       <workItem from="1580241163640" duration="2951000" />
       <workItem from="1580244850179" duration="34315000" />
       <workItem from="1580342224555" duration="1160000" />
+      <workItem from="1580417843574" duration="2414000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/home/mzc/IdeaProjects/assignment/webapp/RunUt" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="872" y="190" width="804" height="674" key="#Project_Structure" timestamp="1580336346422">
@@ -218,26 +315,26 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="929" y="187" width="777" height="635" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580326464650" />
-    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl" timestamp="1580343126871">
+    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl" timestamp="1580418725583">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1580343126871" />
-    <state width="700" height="201" key="GridCell.Tab.0.bottom" timestamp="1580340586825">
+    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1580418725583" />
+    <state width="1030" height="201" key="GridCell.Tab.0.bottom" timestamp="1580420329822">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1580340586825" />
-    <state width="700" height="201" key="GridCell.Tab.0.center" timestamp="1580340586821">
+    <state width="1030" height="201" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1580420329822" />
+    <state width="1030" height="201" key="GridCell.Tab.0.center" timestamp="1580420329822">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1580340586821" />
-    <state width="700" height="201" key="GridCell.Tab.0.left" timestamp="1580340586818">
+    <state width="1030" height="201" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1580420329822" />
+    <state width="1030" height="201" key="GridCell.Tab.0.left" timestamp="1580420329822">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1580340586818" />
-    <state width="700" height="201" key="GridCell.Tab.0.right" timestamp="1580340586823">
+    <state width="1030" height="201" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1580420329822" />
+    <state width="1030" height="201" key="GridCell.Tab.0.right" timestamp="1580420329822">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1580340586823" />
+    <state width="1030" height="201" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1580420329822" />
     <state width="700" height="201" key="GridCell.Tab.1.bottom" timestamp="1580340586838">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>

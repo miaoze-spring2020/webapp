@@ -51,6 +51,7 @@ public class BillController {
                 response.setStatus(201);
                 response.setContentType("application/json");
                 response.getWriter().write(b.toJSON().toString());
+                return;
             }
             response.setStatus(400);
         } catch (Exception e) {

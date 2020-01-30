@@ -33,7 +33,7 @@ public class DAO {
     }
 
     protected static void begin() {
-        getSession().beginTransaction();
+        if(!getSession().getTransaction().isActive()) getSession().beginTransaction();
     }
 
     protected static void commit() {

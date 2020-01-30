@@ -31,14 +31,16 @@ public class UserController {
     public void createUser(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
 
         JSONObject js = ju.JSONfromRequest(request);
-        String fn = (String) js.get("first_name");
-        String ln = (String) js.get("last_name");
-        String password = (String) js.get("password");
-        String email = (String) js.get("email_address");
 
-        if (fn == null || ln == null || password == null || email == null) {
+        if (!js.has("first_name") || !js.has("last_name") || !js.has("email_address") || !js.has("password")) {
             response.sendError(400, "Bad Request");
         } else {
+            String fn = (String) js.get("first_name");
+            String ln = (String) js.get("last_name");
+            String password = (String) js.get("password");
+            String email = (String) js.get("email_address");
+
+
             //validate username:
             String email_reg = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
             if (!email.matches(email_reg)) {
@@ -48,14 +50,14 @@ public class UserController {
             }
 
             //validate password:
-            PasswordValidator pv = new PasswordValidator(new LengthRule(8,10),
-                    new CharacterRule(EnglishCharacterData.UpperCase,1),
-                    new CharacterRule(EnglishCharacterData.LowerCase,1),
+            PasswordValidator pv = new PasswordValidator(new LengthRule(8, 10),
+                    new CharacterRule(EnglishCharacterData.UpperCase, 1),
+                    new CharacterRule(EnglishCharacterData.LowerCase, 1),
                     new CharacterRule(EnglishCharacterData.Digit),
                     new CharacterRule(EnglishCharacterData.Special));
             PasswordData pd = new PasswordData(password);
             RuleResult res = pv.validate(pd);
-            if(!res.isValid()){
+            if (!res.isValid()) {
                 response.getWriter().write("Invalid Password(must contain 1 Uppercase ,1 Lower case, digits and special characters)");
                 response.setStatus(400);
                 return;
@@ -103,7 +105,7 @@ public class UserController {
             }
             new UserDAO().updateUser(modifiedu);
             response.setStatus(204);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
