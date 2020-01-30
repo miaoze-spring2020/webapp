@@ -33,7 +33,7 @@ jobs:
           
   pr_check:
     docker:
-      - image: ubuntu18.04
+      - image: ubuntu-18.04
     steps:
       - checkout
       - run:
