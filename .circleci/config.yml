@@ -44,7 +44,7 @@ jobs:
           command: |
             echo "try all tests"
             cd RunUt
-            mvn test
+            mvn package
 
 workflows:
   version: 2
