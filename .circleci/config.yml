@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/RunUt
+    working_directory: ~/repo/RunUt
     docker:
       - image: circleci/openjdk:8-jdk-stretch
 
@@ -26,7 +26,7 @@ jobs:
           path: target/surefire-reports
           
   pr_check:
-    
+    working_directory: ~/repo/RunUt
     docker:
       - image: circleci/openjdk:11-jdk-stretch
     steps:
@@ -34,7 +34,6 @@ jobs:
       - run:
           name: compile
           command: |
-            cd RunUt
             mvn compile
       - run:
           name: test
