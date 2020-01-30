@@ -6,15 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ControllerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -243,7 +235,7 @@
       <workItem from="1580241163640" duration="2951000" />
       <workItem from="1580244850179" duration="34315000" />
       <workItem from="1580342224555" duration="1160000" />
-      <workItem from="1580417843574" duration="2414000" />
+      <workItem from="1580417843574" duration="2663000" />
     </task>
     <servers />
   </component>
