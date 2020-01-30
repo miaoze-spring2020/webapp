@@ -39,6 +39,7 @@ jobs:
           name: compile
           command: |
             pwd
+            cd RunUt
             ls
       - run:
           name: test
