@@ -2,31 +2,31 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk-stretch
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: mzc961031
+          MYSQL_DATABASE: cloudDB
+          MYSQL_USER: root
+          MYSQL_PASSWORD: mzc961031
 
     steps:
-      - checkout # check out source code to working directory
-
-      - restore_cache:
-          working_directory: ~/project/RunUt
-          key: RunUt-{{ checksum "pom.xml" }}
-      
-      - run: 
-          working_directory: ~/project/RunUt
-          command: mvn dependency:go-offline
-      
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: RunUt-{{ checksum "pom.xml" }}
-      
+      - checkout
       - run:
-          working_directory: ~/project/RunUt
-          command: mvn test # run the actual tests
-      
-      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
-      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: target/surefire-reports
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd cloudDB < sql-data/dummy.sql
           
   pr_check:
     docker:
@@ -36,12 +36,11 @@ jobs:
       - run:
           name: compile
           working_directory: ~/project/RunUt
-          command: |
-            ls
+          command: mvn compile
       - run:
           name: test
-          command: |
-            echo "try all tests"
+          working_directory: ~/project/RunUt
+          command: mvn test
 
 workflows:
   version: 2
