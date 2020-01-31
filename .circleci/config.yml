@@ -36,8 +36,8 @@ jobs:
       - checkout
       - run:
           name: compile
-          command: |
           working_directory: ~/project/RunUt
+          command: |
             ls
       - run:
           name: test
