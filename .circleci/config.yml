@@ -21,6 +21,7 @@ jobs:
           command: mvn test
 
 workflows:
+  version: 2
   pr-check-workflow:
     jobs:
       - pr_check
