@@ -1,4 +1,3 @@
-import com.me.controller.UserController;
 import com.me.pojo.Bill;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -33,8 +32,24 @@ public class ControllerTest {
     WebApplicationContext webApplicationContext;
 
     @Before
-    public void before(){
+    public void before() throws Exception {
         mock = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        String url = "/v1/user";
+        JSONObject j = new JSONObject();
+
+        //invalid
+        j.put("password","Abcd1234.");
+        j.put("last_name","ooo");
+        j.put("first_name","ooo");
+        j.put("email_address","1234@sum.com");
+        //other fields should be ignored
+        j.put("account_created","anything");
+
+        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(j.toString().getBytes())
+                .accept(MediaType.APPLICATION_JSON)).andReturn();
     }
 
     @Test
@@ -46,7 +61,7 @@ public class ControllerTest {
         j.put("password","Abcd1234.");
         j.put("last_name","ooo");
         j.put("first_name","ooo");
-        j.put("email_address","123@sum.com");
+        j.put("email_address","1234@sum.com");
         //other fields should be ignored
         j.put("account_created","anything");
 
@@ -73,7 +88,7 @@ public class ControllerTest {
         bill.setVendor("TEST");
         bill.setPaymentStatus(Bill.status.paid);
 
-        String auth = "wed@gmail.com:Abcd1234.";
+        String auth = "1234@sum.com:Abcd1234.";
         String base = new String(Base64.encode(auth.getBytes()));
 
         MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
@@ -106,7 +121,7 @@ public class ControllerTest {
     public void testGetBills() throws Exception {
         String url = "/v1/bills";
 
-        String auth = "wed@gmail.com:Abcd1234.";
+        String auth = "1234@sum.com:Abcd1234.";
         String base = new String(Base64.encode(auth.getBytes()));
 
         MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.get(url)
@@ -124,7 +139,7 @@ public class ControllerTest {
     public void testGetUser() throws Exception {
         String url = "/v1/user/self";
 
-        String auth = "wed@gmail.com:Abcd1234.";
+        String auth = "1234@sum.com:Abcd1234.";
         String base = new String(Base64.encode(auth.getBytes()));
 
         MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.get(url)
@@ -134,6 +149,33 @@ public class ControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
+
+    @Test
+    public void testPutBill() throws Exception {
+        String url = "/v1/bill/123";
+
+        Bill bill = new Bill();
+        bill.setCategories(new HashSet<>());
+        bill.setAmount_due(1000.01);
+        bill.setBill_date(LocalDate.now());
+        bill.setDue_date(LocalDate.now());
+        bill.setVendor("TEST");
+        bill.setPaymentStatus(Bill.status.paid);
+
+        String auth = "1234@sum.com:Abcd1234.";
+        String base = new String(Base64.encode(auth.getBytes()));
+
+        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.put(url)
+                .header("Authorization","Basic " + base)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bill.toJSON().toString().getBytes())
+                .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }

@@ -183,12 +183,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
       <item itemvalue="JUnit.ControllerTest.testAuthorization" />
       <item itemvalue="JUnit.ControllerTest.testCreateBill" />
       <item itemvalue="JUnit.ControllerTest.testGetBills" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.testGetUser" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
     </list>
     <recent_temporary>
       <list>
