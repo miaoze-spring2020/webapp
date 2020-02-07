@@ -67,14 +67,14 @@ public class JSONUtils {
     }
 
     public Bill parseBill(JSONObject json, Bill bill) {
+        if (!json.has("vendor") || !json.has("bill_date") || !json.has("due_date") || !json.has("amount_due") || !json.has("categories") || !json.has("paymentStatus")) return null;
+
         String v = json.getString("vendor");
         String bd = json.getString("bill_date");
         String dd = json.getString("due_date");
         double ad = json.getDouble("amount_due");
         JSONArray categories = json.getJSONArray("categories");
         String stat = json.getString("paymentStatus");
-
-        if (v == null || bd == null || dd == null || ad < 0.01 || categories == null || stat == null) return null;
 
         if (v != null) bill.setVendor(v);
         if (bd != null) {
