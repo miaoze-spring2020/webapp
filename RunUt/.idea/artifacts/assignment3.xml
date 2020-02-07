@@ -58,8 +58,12 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.18" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: org.passay:passay:1.5.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-test:5.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.2.1.RELEASE" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="RunUt/web/Web" />
     </root>
   </artifact>
 </component>

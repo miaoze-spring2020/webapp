@@ -2,6 +2,7 @@ package com.me.pojo;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -42,8 +43,7 @@ public class Bill {
     @NumberFormat(pattern = "#.##")
     private double amount_due;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(joinColumns = @JoinColumn(name = "category"))
+    @ElementCollection
     private Set<String> categories;
 
     @Column
@@ -52,6 +52,7 @@ public class Bill {
     public enum status{
         paid, due, past_due, no_payment_required;
     }
+
 
     public String getId() {
         return id;
@@ -143,7 +144,11 @@ public class Bill {
         json.put("bill_date",bill_date);
         json.put("due_date",due_date);
         json.put("amount_due",amount_due);
-        json.put("categories",categories);
+        JSONArray ja = new JSONArray();
+        for(String s: categories){
+            ja.put(s);
+        }
+        json.put("categories",ja);
         json.put("paymentStatus",paymentStatus);
 
         return json;
