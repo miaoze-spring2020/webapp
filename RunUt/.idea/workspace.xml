@@ -7,11 +7,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RunUt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RunUt.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/assignment3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/assignment3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/WEB-INF/classes/hibernate.cfg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/WEB-INF/dispatcher-servlet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/RunUt_war_exploded/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/classes/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/classes/WEB-INF/dispatcher-servlet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/classes/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/classes/hibernate.cfg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/classes/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/dispatcher-servlet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/assignment3/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/dao/BillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/dao/BillDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/dao/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/pojo/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/pojo/Bill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/utils/JSONUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/utils/JSONUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WEB-INF/dispatcher-servlet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/ControllerTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ControllerTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +87,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.21149425" />
@@ -62,46 +103,23 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web/WEB-INF" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.301">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.App (2)">
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RunUt" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.testAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RunUt" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
-      <option name="METHOD_NAME" value="testAuthorization" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.testCreateBill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RunUt" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
-      <option name="METHOD_NAME" value="testCreateBill" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.testGetBills" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RunUt" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
-      <option name="METHOD_NAME" value="testGetBills" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -112,6 +130,39 @@
       <option name="MAIN_CLASS_NAME" value="ControllerTest" />
       <option name="METHOD_NAME" value="testGetUser" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.me.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.me.application.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.me.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.me.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="App" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -191,20 +242,29 @@
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="JUnit.ControllerTest.testAuthorization" />
       <item itemvalue="JUnit.ControllerTest.testCreateBill" />
       <item itemvalue="JUnit.ControllerTest.testGetBills" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.testGetUser" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
+=======
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.ControllerTest.testGetUser" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
+      <item itemvalue="Spring Boot.App" />
+      <item itemvalue="Spring Boot.App (1)" />
+      <item itemvalue="Spring Boot.App (2)" />
+>>>>>>> assignment4
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.App (2)" />
+        <item itemvalue="Spring Boot.App (1)" />
+        <item itemvalue="Spring Boot.App" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.ControllerTest.testGetUser" />
-        <item itemvalue="JUnit.ControllerTest.testCreateBill" />
-        <item itemvalue="JUnit.ControllerTest.testGetBills" />
-        <item itemvalue="JUnit.ControllerTest.testAuthorization" />
       </list>
     </recent_temporary>
   </component>
@@ -216,12 +276,16 @@
             <expand>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -245,7 +309,9 @@
       <workItem from="1580342224555" duration="1160000" />
       <workItem from="1580417843574" duration="2944000" />
       <workItem from="1580432185926" duration="1270000" />
-      <workItem from="1581098050529" duration="4717000" />
+      <workItem from="1581098050529" duration="6774000" />
+      <workItem from="1581115661942" duration="765000" />
+      <workItem from="1581360540143" duration="6825000" />
     </task>
     <servers />
   </component>
@@ -289,6 +355,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="847" y="338" width="804" height="674" key="#Inspections" timestamp="1581362514943">
+      <screen x="0" y="0" width="1920" height="1054" />
+    </state>
+    <state x="847" y="338" width="804" height="674" key="#Inspections/0.0.1920.1054@0.0.1920.1054" timestamp="1581362514943" />
     <state x="872" y="190" width="804" height="674" key="#Project_Structure" timestamp="1580336346422">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
@@ -297,10 +367,10 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="1102" y="350" width="528" height="481" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580329936569" />
-    <state x="779" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581100956592">
+    <state x="779" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581361003310">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="779" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1581100956592" />
+    <state x="779" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1581361003310" />
     <state x="1042" y="312" width="552" height="386" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580256805486">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
@@ -321,62 +391,62 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1581100646589" />
-    <state width="700" height="201" key="GridCell.Tab.0.bottom" timestamp="1581107714034">
+    <state width="700" height="201" key="GridCell.Tab.0.bottom" timestamp="1581367418048">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714034" />
-    <state width="700" height="201" key="GridCell.Tab.0.center" timestamp="1581107714031">
+    <state width="700" height="201" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418048" />
+    <state width="700" height="201" key="GridCell.Tab.0.center" timestamp="1581367418048">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714031" />
-    <state width="700" height="201" key="GridCell.Tab.0.left" timestamp="1581107714030">
+    <state width="700" height="201" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418048" />
+    <state width="700" height="201" key="GridCell.Tab.0.left" timestamp="1581367418048">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714030" />
-    <state width="700" height="201" key="GridCell.Tab.0.right" timestamp="1581107714033">
+    <state width="700" height="201" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418048" />
+    <state width="700" height="201" key="GridCell.Tab.0.right" timestamp="1581367418048">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714033" />
-    <state width="700" height="201" key="GridCell.Tab.1.bottom" timestamp="1581107714036">
+    <state width="700" height="201" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418048" />
+    <state width="700" height="201" key="GridCell.Tab.1.bottom" timestamp="1581367418049">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714036" />
-    <state width="700" height="201" key="GridCell.Tab.1.center" timestamp="1581107714035">
+    <state width="700" height="201" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418049" />
+    <state width="700" height="201" key="GridCell.Tab.1.center" timestamp="1581367418049">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714035" />
-    <state width="700" height="201" key="GridCell.Tab.1.left" timestamp="1581107714035">
+    <state width="700" height="201" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418049" />
+    <state width="700" height="201" key="GridCell.Tab.1.left" timestamp="1581367418049">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714034" />
-    <state width="700" height="201" key="GridCell.Tab.1.right" timestamp="1581107714036">
+    <state width="700" height="201" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418049" />
+    <state width="700" height="201" key="GridCell.Tab.1.right" timestamp="1581367418049">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714036" />
-    <state width="700" height="201" key="GridCell.Tab.2.bottom" timestamp="1581107714043">
+    <state width="700" height="201" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581367418049" />
+    <state width="700" height="201" key="GridCell.Tab.2.bottom" timestamp="1581111525226">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.2.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714043" />
-    <state width="700" height="201" key="GridCell.Tab.2.center" timestamp="1581107714042">
+    <state width="700" height="201" key="GridCell.Tab.2.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581111525226" />
+    <state width="700" height="201" key="GridCell.Tab.2.center" timestamp="1581111525226">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.2.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714042" />
-    <state width="700" height="201" key="GridCell.Tab.2.left" timestamp="1581107714041">
+    <state width="700" height="201" key="GridCell.Tab.2.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581111525226" />
+    <state width="700" height="201" key="GridCell.Tab.2.left" timestamp="1581111525225">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.2.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714041" />
-    <state width="700" height="201" key="GridCell.Tab.2.right" timestamp="1581107714043">
+    <state width="700" height="201" key="GridCell.Tab.2.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581111525225" />
+    <state width="700" height="201" key="GridCell.Tab.2.right" timestamp="1581111525226">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="700" height="201" key="GridCell.Tab.2.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581107714043" />
+    <state width="700" height="201" key="GridCell.Tab.2.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581111525226" />
     <state x="744" y="348" width="928" height="681" key="Maven.ArtifactSearchDialog" timestamp="1580335520812">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="744" y="348" width="928" height="681" key="Maven.ArtifactSearchDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580335520812" />
-    <state x="886" y="0" width="1028" height="842" key="SettingsEditor" timestamp="1581100659206">
+    <state x="886" y="0" width="1028" height="842" key="SettingsEditor" timestamp="1581365338872">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="886" y="0" width="1028" height="842" key="SettingsEditor/0.0.1920.1054@0.0.1920.1054" timestamp="1581100659206" />
+    <state x="886" y="0" width="1028" height="842" key="SettingsEditor/0.0.1920.1054@0.0.1920.1054" timestamp="1581365338872" />
     <state x="883" y="200" width="876" height="613" key="dock-window-1" timestamp="1580254569483">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>

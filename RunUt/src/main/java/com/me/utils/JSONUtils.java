@@ -8,24 +8,22 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.codec.Base64;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@Component("jsonUtils")
 public class JSONUtils {
 
     @Autowired
     @Qualifier("userDAO")
     UserDAO userDAO;
 
-    public User autherize(HttpServletRequest request) {
-        String tokens = request.getHeader("Authorization");
-        if (tokens != null && tokens.startsWith("Basic")) {
-            String base64credentials = tokens.substring(5).trim();
+    public User autherize(String auth) {
+        if (auth != null && auth.startsWith("Basic")) {
+            String base64credentials = auth.substring(5).trim();
             byte[] cred = Base64.decode(base64credentials.getBytes());
             String credentials = new String(cred);
             String[] values = credentials.split(":", 2);//username, password
@@ -33,19 +31,6 @@ public class JSONUtils {
             return u;
         }
         return null;
-    }
-
-    public JSONObject JSONfromRequest(HttpServletRequest request) throws IOException {
-        String data = "";
-        StringBuilder builder = new StringBuilder();
-        BufferedReader reader = request.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            builder.append(line);
-        }
-        data = builder.toString();
-        JSONObject js = new JSONObject(data);
-        return js;
     }
 
     public User parseUser(JSONObject json, User u) {

@@ -5,9 +5,11 @@ import com.me.pojo.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component("billDAO")
 public class BillDAO extends DAO {
 
 
@@ -47,10 +49,13 @@ public class BillDAO extends DAO {
         }
     }
 
-    public Bill getBill(String id) {
+    public Bill getBill(String bid, User user) {
         try {
             begin();
-            Bill bill = getSession().get(Bill.class, id);
+            Criteria c = getSession().createCriteria(Bill.class);
+            c.add(Restrictions.eq("owner", user))
+            .add(Restrictions.eq("id",bid));
+            Bill bill = (Bill)c.uniqueResult();
             commit();
 
             return bill;

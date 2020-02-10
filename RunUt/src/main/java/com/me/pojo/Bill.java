@@ -40,7 +40,6 @@ public class Bill {
     private LocalDate due_date;
 
     @Column
-    @NumberFormat(pattern = "#.##")
     private double amount_due;
 
     @ElementCollection
@@ -139,7 +138,7 @@ public class Bill {
         json.put("id",id);
         json.put("created_ts",created_ts);
         json.put("updated_ts",updated_ts);
-        json.put("owner_id",owner);
+        json.put("owner_id",owner.getId());
         json.put("vendor",vendor);
         json.put("bill_date",bill_date);
         json.put("due_date",due_date);
