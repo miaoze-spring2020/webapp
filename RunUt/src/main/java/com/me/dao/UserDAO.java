@@ -5,9 +5,11 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component("userDAO")
 public class UserDAO extends DAO{
 
     public User createUser(String fn, String ln, String pwd, String email){
