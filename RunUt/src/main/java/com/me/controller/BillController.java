@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/v1/bill/","/v1/bill/*", "/v1/bills"})
+@RequestMapping({"/v1/bill/","/v1/bill/*","/v1/bill*"})
 public class BillController {
 
     @Autowired
@@ -43,13 +43,13 @@ public class BillController {
             b.setCreated_ts(LocalDateTime.now());
             b.setUpdated_ts(LocalDateTime.now());
             billDAO.createBill(b);
-            return ResponseEntity.status(201).body(b.toJSON());
+            return ResponseEntity.status(201).body(b.toJSON().toString());
         }
         return ResponseEntity.status(400).body("invalid input");
 
     }
 
-    @RequestMapping(value = "/v1/bills", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/v1/bills", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBills(@RequestHeader("Authorization") String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -60,11 +60,11 @@ public class BillController {
         for (Bill b : bills) {
             ja.put(b.toJSON());
         }
-        return ResponseEntity.ok().body(ja);
+        return ResponseEntity.ok().body(ja.toString());
 
     }
 
-    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBill(@RequestHeader("Authorization") String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -72,7 +72,7 @@ public class BillController {
         }
         Bill b = billDAO.getBill(id, u);
         if (b != null) {
-            return ResponseEntity.ok().body(b.toJSON());
+            return ResponseEntity.ok().body(b.toJSON().toString());
         }
         return ResponseEntity.status(404).body("No such Bill");
     }
@@ -95,11 +95,11 @@ public class BillController {
         }
 
         modifiedb = billDAO.updateBill(modifiedb);
-        return ResponseEntity.status(200).body(modifiedb.toJSON());
+        return ResponseEntity.status(200).body(modifiedb.toJSON().toString());
 
     }
 
-    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteBill(@RequestHeader("Authorization") String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {

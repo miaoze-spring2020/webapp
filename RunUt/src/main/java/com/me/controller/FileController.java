@@ -41,8 +41,8 @@ public class FileController {
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
         }
-        Bill b = billDAO.getBill(id,u);
-        if(b == null){
+        Bill b = billDAO.getBill(id, u);
+        if (b == null) {
             return ResponseEntity.status(404).body("bill not found");
         }
         if (file.isEmpty()) {
@@ -69,4 +69,38 @@ public class FileController {
 
     }
 
+    @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity getFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) throws IOException {
+        User u = ju.autherize(auth);
+        if (u == null) {
+            return ResponseEntity.status(401).body("unauthorized user");
+        }
+        Bill b = billDAO.getBill(bid, u);
+        if (b == null) {
+            return ResponseEntity.status(404).body("bill not found");
+        }
+        File f = fileDAO.getFile(fid, b, u);
+        if (f == null) {
+            return ResponseEntity.status(404).body("file not found");
+        }
+        return ResponseEntity.ok().body(f.toJSON().toString());
+    }
+
+    @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) throws IOException {
+        User u = ju.autherize(auth);
+        if (u == null) {
+            return ResponseEntity.status(401).body("unauthorized user");
+        }
+        Bill b = billDAO.getBill(bid, u);
+        if (b == null) {
+            return ResponseEntity.status(404).body("bill not found");
+        }
+        File f = fileDAO.getFile(fid, b, u);
+        if (f == null) {
+            return ResponseEntity.status(404).body("file not found");
+        }
+        fileDAO.deleteFile(f);
+        return ResponseEntity.noContent().build();
+    }
 }

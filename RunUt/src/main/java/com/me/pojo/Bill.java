@@ -159,7 +159,11 @@ public class Bill {
         }
         json.put("categories",ja);
         json.put("paymentStatus",paymentStatus);
-        json.put("attachment",attachment.toJSON());
+        if(attachment != null) {
+            json.put("attachment", attachment.toJSON());
+        }else{
+            json.put("attachment","no attachment");
+        }
 
         return json;
     }
