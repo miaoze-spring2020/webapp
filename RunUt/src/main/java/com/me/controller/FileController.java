@@ -59,7 +59,7 @@ public class FileController {
         }
 
         byte[] bytes = file.getBytes();
-        String newfilename = u.getEmail_address() + "_" + filename;
+        String newfilename = b.getId() + "_" + filename;
         //delete if exists
         Path path = Paths.get(UPLOAD_DIR + newfilename);
         Files.deleteIfExists(path);
