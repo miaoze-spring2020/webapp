@@ -8,13 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/BillController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tmp/1204725-beautiful-new-york-city-desktop-wallpaper-2048x1367.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/pojo/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/pojo/Bill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/utils/JSONUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/utils/JSONUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,22 +76,12 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.testgetFile">
+  <component name="RunManager" selected="Spring Boot.App">
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="RunUt" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.testCreateBill" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="RunUt" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ControllerTest" />
-      <option name="METHOD_NAME" value="testCreateBill" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,6 +112,19 @@
       <option name="MAIN_CLASS_NAME" value="ControllerTest" />
       <option name="METHOD_NAME" value="testgetFile" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="RunUt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.me.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.me.App" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -207,19 +205,19 @@
     </configuration>
     <list>
       <item itemvalue="Tomcat Server.Tomcat 9.0.301" />
-      <item itemvalue="JUnit.ControllerTest.testCreateBill" />
       <item itemvalue="JUnit.ControllerTest.testCreateFile" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.testCreateUser" />
       <item itemvalue="JUnit.ControllerTest.testgetFile" />
+      <item itemvalue="Spring Boot.App" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.App" />
         <item itemvalue="JUnit.ControllerTest.testgetFile" />
         <item itemvalue="JUnit.ControllerTest.testCreateFile" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.ControllerTest.testCreateUser" />
-        <item itemvalue="JUnit.ControllerTest.testCreateBill" />
       </list>
     </recent_temporary>
   </component>
@@ -346,38 +344,38 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1581100646589" />
-    <state width="1878" height="388" key="GridCell.Tab.0.bottom" timestamp="1581457354890">
+    <state width="1294" height="281" key="GridCell.Tab.0.bottom" timestamp="1581459970627">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1878" height="388" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581457354890" />
-    <state width="1878" height="388" key="GridCell.Tab.0.center" timestamp="1581457354890">
+    <state width="1294" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970627" />
+    <state width="1294" height="281" key="GridCell.Tab.0.center" timestamp="1581459970627">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1878" height="388" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581457354890" />
-    <state width="1878" height="388" key="GridCell.Tab.0.left" timestamp="1581457354886">
+    <state width="1294" height="281" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970627" />
+    <state width="1294" height="281" key="GridCell.Tab.0.left" timestamp="1581459970627">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1878" height="388" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581457354886" />
-    <state width="1878" height="388" key="GridCell.Tab.0.right" timestamp="1581457354890">
+    <state width="1294" height="281" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970627" />
+    <state width="1294" height="281" key="GridCell.Tab.0.right" timestamp="1581459970627">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1878" height="388" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581457354890" />
-    <state width="1294" height="281" key="GridCell.Tab.1.bottom" timestamp="1581456734245">
+    <state width="1294" height="281" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970627" />
+    <state width="1294" height="281" key="GridCell.Tab.1.bottom" timestamp="1581459970630">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="281" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581456734245" />
-    <state width="1294" height="281" key="GridCell.Tab.1.center" timestamp="1581456734245">
+    <state width="1294" height="281" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970630" />
+    <state width="1294" height="281" key="GridCell.Tab.1.center" timestamp="1581459970630">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="281" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581456734245" />
-    <state width="1294" height="281" key="GridCell.Tab.1.left" timestamp="1581456734244">
+    <state width="1294" height="281" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970630" />
+    <state width="1294" height="281" key="GridCell.Tab.1.left" timestamp="1581459970627">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="281" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581456734244" />
-    <state width="1294" height="281" key="GridCell.Tab.1.right" timestamp="1581456734245">
+    <state width="1294" height="281" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970627" />
+    <state width="1294" height="281" key="GridCell.Tab.1.right" timestamp="1581459970630">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="281" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581456734245" />
+    <state width="1294" height="281" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1581459970630" />
     <state width="700" height="201" key="GridCell.Tab.2.bottom" timestamp="1581111525226">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>

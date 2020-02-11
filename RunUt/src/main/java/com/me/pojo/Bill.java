@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -152,11 +153,13 @@ public class Bill {
         json.put("vendor",vendor);
         json.put("bill_date",bill_date);
         json.put("due_date",due_date);
-        json.put("amount_due",amount_due);
+        DecimalFormat df = new DecimalFormat("0.00");
+        json.put("amount_due",df.format(amount_due));
         JSONArray ja = new JSONArray();
         for(String s: categories){
             ja.put(s);
         }
+
         json.put("categories",ja);
         json.put("paymentStatus",paymentStatus);
         if(attachment != null) {
