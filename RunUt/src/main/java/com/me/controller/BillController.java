@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/v1/bill/**", "/v1/bill*"})
+@RequestMapping({"/v1/bill/","/v1/bill/*", "/v1/bills"})
 public class BillController {
 
     @Autowired
