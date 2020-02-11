@@ -4,9 +4,9 @@ package com.me.pojo;
 import org.hibernate.annotations.GenericGenerator;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class Bill {
     private LocalDateTime updated_ts;
 
     @ManyToOne
-    @JoinColumn(name="owner_id")
+    @JoinColumn
     private User owner;
 
     @Column
@@ -47,6 +47,9 @@ public class Bill {
 
     @Column
     private status paymentStatus;
+
+    @OneToOne(mappedBy = "bill_id" , cascade = CascadeType.ALL)
+    private File attachment;
 
     public enum status{
         paid, due, past_due, no_payment_required;
@@ -133,6 +136,14 @@ public class Bill {
         this.due_date = due_date;
     }
 
+    public File getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(File attachment) {
+        this.attachment = attachment;
+    }
+
     public JSONObject toJSON(){
         JSONObject json = new JSONObject();
         json.put("id",id);
@@ -142,13 +153,20 @@ public class Bill {
         json.put("vendor",vendor);
         json.put("bill_date",bill_date);
         json.put("due_date",due_date);
-        json.put("amount_due",amount_due);
+        DecimalFormat df = new DecimalFormat("0.00");
+        json.put("amount_due",df.format(amount_due));
         JSONArray ja = new JSONArray();
         for(String s: categories){
             ja.put(s);
         }
+
         json.put("categories",ja);
         json.put("paymentStatus",paymentStatus);
+        if(attachment != null) {
+            json.put("attachment", attachment.toJSON());
+        }else{
+            json.put("attachment","no attachment");
+        }
 
         return json;
     }

@@ -1,118 +1,119 @@
+import com.me.App;
 import com.me.pojo.Bill;
+import com.me.pojo.User;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.codec.Base64;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(locations = { "classpath:hibernate.cfg.xml","/WEB-INF/applicationContext.xml","/WEB-INF/dispatcher-servlet.xml"})
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = App.class)
+@AutoConfigureMockMvc
+@ContextConfiguration(locations = {"classpath:./hibernate.cfg.xml"})
 public class ControllerTest {
 
+    @Autowired
     private MockMvc mock;
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
+    private Bill bill;
+
+    private User user;
 
     @Before
     public void before() throws Exception {
-        mock = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         String url = "/v1/user";
-        JSONObject j = new JSONObject();
+        user = new User();
+        user.setEmail_address("test@sun.com");
+        user.setPassword("Abcd1234.");
+        user.setLast_name("test");
+        user.setFirst_name("test");
 
-        //invalid
-        j.put("password","Abcd1234.");
-        j.put("last_name","ooo");
-        j.put("first_name","ooo");
-        j.put("email_address","1234@sum.com");
-        //other fields should be ignored
-        j.put("account_created","anything");
+        JSONObject j = user.toJSON();
+        j.put("password",user.getPassword());
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
+        this.mock.perform(post(url)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(j.toString().getBytes())
-                .accept(MediaType.APPLICATION_JSON)).andReturn();
-    }
-
-    @Test
-    public void testCreateUser() throws Exception {
-        String url = "/v1/user";
-        JSONObject j = new JSONObject();
-
-        //invalid
-        j.put("password","Abcd1234.");
-        j.put("last_name","ooo");
-        j.put("first_name","ooo");
-        j.put("email_address","1234@sum.com");
-        //other fields should be ignored
-        j.put("account_created","anything");
-
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(j.toString().getBytes())
-                .accept(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andDo(MockMvcResultHandlers.print())
+                .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
-    }
 
-    @Test
-    public void testCreateBill() throws Exception {
-        String url = "/v1/bill/";
+        String burl = "/v1/bill/";
 
-        Bill bill = new Bill();
+        bill = new Bill();
         bill.setCategories(new HashSet<>());
         bill.setAmount_due(1000.01);
         bill.setBill_date(LocalDate.now());
         bill.setDue_date(LocalDate.now());
         bill.setVendor("TEST");
         bill.setPaymentStatus(Bill.status.paid);
+        bill.setOwner(user);
 
-        String auth = "1234@sum.com:Abcd1234.";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
-                .header("Authorization","Basic " + base)
+        mock.perform(post(burl).header("Authorization", "Basic " + base)).andReturn();
+    }
+
+    @Test
+    public void testCreateUser() throws Exception {
+        String url = "/v1/user";
+
+        mock.perform(post(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(user.toJSON().toString().getBytes())
+                .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isBadRequest())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
+
+    @Test
+    @Rollback
+    public void testCreateBill() throws Exception {
+        String url = "/v1/bill/";
+
+        String auth = user.getEmail_address() + ":" + user.getPassword();
+        String base = new String(Base64.encode(auth.getBytes()));
+
+        MvcResult mvcRes = mock.perform(post(url)
+                .header("Authorization", "Basic " + base)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(bill.toJSON().toString().getBytes())
-                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(status().isCreated())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
 
     @Test
     public void testAuthorization() throws Exception {
-        String url = "/v1/bill/";
+        String url = "/v1/bills";
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.post(url)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+        mock.perform(get(url))
+                .andExpect(status().isUnauthorized())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
@@ -121,16 +122,16 @@ public class ControllerTest {
     public void testGetBills() throws Exception {
         String url = "/v1/bills";
 
-        String auth = "1234@sum.com:Abcd1234.";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.get(url)
-                .header("Authorization","Basic" + base)
+        mock.perform(get(url)
+                .header("Authorization", "Basic" + base)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
@@ -139,45 +140,69 @@ public class ControllerTest {
     public void testGetUser() throws Exception {
         String url = "/v1/user/self";
 
-        String auth = "1234@sum.com:Abcd1234.";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.get(url)
-                .header("Authorization","Basic" + base)
+        mock.perform(MockMvcRequestBuilders.get(url)
+                .header("Authorization", "Basic" + base)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
 
     @Test
+    @Rollback
     public void testPutBill() throws Exception {
         String url = "/v1/bill/123";
 
-        Bill bill = new Bill();
-        bill.setCategories(new HashSet<>());
-        bill.setAmount_due(1000.01);
-        bill.setBill_date(LocalDate.now());
-        bill.setDue_date(LocalDate.now());
-        bill.setVendor("TEST");
-        bill.setPaymentStatus(Bill.status.paid);
-
-        String auth = "1234@sum.com:Abcd1234.";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 
-        MvcResult mvcRes = mock.perform(MockMvcRequestBuilders.put(url)
-                .header("Authorization","Basic " + base)
+        mock.perform(MockMvcRequestBuilders.put(url)
+                .header("Authorization", "Basic " + base)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(bill.toJSON().toString().getBytes())
-                .accept(MediaType.APPLICATION_JSON)
         )
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(status().isNotFound())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
+    }
+
+    @Test
+    @Rollback
+    public void testCreateFile() throws Exception {
+        String url = "/v1/bill/"+bill.getId()+"/file";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
+        String base = new String(Base64.encode(auth.getBytes()));
+
+        mock.perform(post(url)
+                .header("Authorization", "Basic" + base)
+        )
+                .andExpect(status().isNotFound())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+    }
+
+    @Test
+    @Rollback
+    public void testgetFile() throws Exception {
+        String url = "/v1/bill/"+bill.getId()+"/file/test";
+        String auth = user.getEmail_address() + ":" + user.getPassword();
+        String base = new String(Base64.encode(auth.getBytes()));
+
+        mock.perform(get(url)
+                .header("Authorization", "Basic" + base)
+        )
+                .andExpect(status().isNotFound())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
     }
 
 }

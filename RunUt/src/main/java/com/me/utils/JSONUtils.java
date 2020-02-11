@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,6 +52,8 @@ public class JSONUtils {
         return u;
     }
 
+    private DecimalFormat df = new DecimalFormat("#.##");
+
     public Bill parseBill(JSONObject json, Bill bill) {
         if (!json.has("vendor") || !json.has("bill_date") || !json.has("due_date") || !json.has("amount_due") || !json.has("categories") || !json.has("paymentStatus")) return null;
 
@@ -58,6 +61,7 @@ public class JSONUtils {
         String bd = json.getString("bill_date");
         String dd = json.getString("due_date");
         double ad = json.getDouble("amount_due");
+        if(ad < 0.01) return null;
         JSONArray categories = json.getJSONArray("categories");
         String stat = json.getString("paymentStatus");
 
@@ -70,7 +74,7 @@ public class JSONUtils {
             String[] dds = dd.split("-", 3);
             bill.setDue_date(LocalDate.of(Integer.parseInt(dds[0]), Integer.parseInt(dds[1]), Integer.parseInt(dds[2])));
         }
-        if (ad >= 0.01) bill.setAmount_due(ad);
+        bill.setAmount_due(ad);
         if (categories != null) {
             Set<String> set = new HashSet<>();
             for (int i = 0; i < categories.length(); i++) {
