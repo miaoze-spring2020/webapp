@@ -28,7 +28,7 @@ public class BillController {
     BillDAO billDAO;
 
     @RequestMapping(value = "/v1/bill/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public ResponseEntity createBill(@RequestBody String bill, @RequestHeader("Authorized") String auth) {
+    public ResponseEntity createBill(@RequestBody String bill, @RequestHeader(value = "Authorization", required = false) String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -50,7 +50,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bills", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getBills(@RequestHeader("Authorization") String auth) {
+    public ResponseEntity getBills(@RequestHeader(value = "Authorization",required = false) String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -65,7 +65,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getBill(@RequestHeader("Authorization") String auth, @PathVariable("id") String id) {
+    public ResponseEntity getBill(@RequestHeader(value = "Authorization",required = false) String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -78,7 +78,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public ResponseEntity updateBill(@RequestHeader("Authorization") String auth, @PathVariable("id") String id, @RequestBody String modi) {
+    public ResponseEntity updateBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id, @RequestBody String modi) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -100,7 +100,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteBill(@RequestHeader("Authorization") String auth, @PathVariable("id") String id) {
+    public ResponseEntity deleteBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");

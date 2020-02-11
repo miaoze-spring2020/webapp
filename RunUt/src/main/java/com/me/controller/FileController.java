@@ -36,7 +36,7 @@ public class FileController {
     private static String UPLOAD_DIR = "src/main/resources/tmp/";
 
     @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST)
-    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam("file") MultipartFile file, @PathVariable("id") String id) throws IOException {
+    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file",required = false) MultipartFile file, @PathVariable("id") String id) throws IOException {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -45,7 +45,7 @@ public class FileController {
         if (b == null) {
             return ResponseEntity.status(404).body("bill not found");
         }
-        if (file.isEmpty()) {
+        if (file == null || file.isEmpty()) {
             return ResponseEntity.status(400).body("No content");
         }
 
