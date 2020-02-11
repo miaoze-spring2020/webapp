@@ -13,6 +13,7 @@
         <property name="hibernate.show_sql">true</property>
         <mapping class="com.me.pojo.User"/>
         <mapping class="com.me.pojo.Bill"/>
+        <mapping class="com.me.pojo.File"/>
     </session-factory>
 </hibernate-configuration>
 

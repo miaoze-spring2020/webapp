@@ -66,7 +66,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/v1/user/self", method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/v1/user/self", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUserInfo(@RequestHeader("Authorization") String auth) {
         User u = ju.autherize(auth);
         if (u != null) {
@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.status(401).body("Unauthorized user");
     }
 
-    @RequestMapping(value = "/v1/user/self", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/v1/user/self", method = RequestMethod.PUT, consumes = "application/json")
     public ResponseEntity updateUserInfo(@RequestBody String modi, @RequestHeader("Authorization") String auth) {
         JSONObject js = new JSONObject(new JSONTokener((new JSONObject(modi)).toString()));
 
