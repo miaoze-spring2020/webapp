@@ -36,7 +36,7 @@ public class FileController {
     private static String UPLOAD_DIR = "src/main/resources/tmp/";
 
     @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST)
-    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file",required = false) MultipartFile file, @PathVariable("id") String id) throws IOException {
+    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) throws IOException {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -46,7 +46,7 @@ public class FileController {
             return ResponseEntity.status(404).body("bill not found");
         }
         if (file == null || file.isEmpty()) {
-            return ResponseEntity.status(400).body("No content");
+            return ResponseEntity.status(422).body("empty file");
         }
 
         String filename = file.getOriginalFilename();
@@ -55,18 +55,18 @@ public class FileController {
 
         if (!suffix.equalsIgnoreCase("jpeg") && !suffix.equalsIgnoreCase("jpg")
                 && !suffix.equalsIgnoreCase("png") && !suffix.equalsIgnoreCase("pdf")) {
-            return ResponseEntity.status(400).body("invalid file format: " + suffix);
+            return ResponseEntity.status(422).body("invalid file format: " + suffix);
         }
-
-        byte[] bytes = file.getBytes();
         String newfilename = b.getId() + "_" + filename;
         //delete if exists
         Path path = Paths.get(UPLOAD_DIR + newfilename);
-        Files.deleteIfExists(path);
-
+        if (Files.exists(path)) {
+            return ResponseEntity.status(409).body("file already exists");
+        }
         java.io.File newf = new java.io.File(UPLOAD_DIR + newfilename);
         newf.createNewFile();
 
+        byte[] bytes = file.getBytes();
         Files.write(path, bytes);
 
 
