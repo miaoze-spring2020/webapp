@@ -36,7 +36,7 @@ public class FileController {
     private static String UPLOAD_DIR = "src/main/resources/tmp/";
 
     @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST)
-    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) throws IOException {
+    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -64,10 +64,23 @@ public class FileController {
             return ResponseEntity.status(409).body("file already exists");
         }
         java.io.File newf = new java.io.File(UPLOAD_DIR + newfilename);
-        newf.createNewFile();
+        try {
+            newf.createNewFile();
+        } catch (IOException e) {
+            return ResponseEntity.status(405).body("Failed to upload file to server side");
+        }
 
-        byte[] bytes = file.getBytes();
-        Files.write(path, bytes);
+        byte[] bytes = new byte[0];
+        try {
+            bytes = file.getBytes();
+        } catch (IOException e) {
+            return ResponseEntity.status(405).body("Failed to read attached file");
+        }
+        try {
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            return ResponseEntity.status(405).body("Failed to write in file content");
+        }
 
 
         //filedao
@@ -82,12 +95,12 @@ public class FileController {
         billDAO.updateBill(b);
         fileDAO.addFile(f);
 
-        return ResponseEntity.status(201).body("File uploaded id: " + f.getId());
+        return ResponseEntity.status(201).body(f.toJSON().toString());
 
     }
 
     @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) throws IOException {
+    public ResponseEntity getFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -104,7 +117,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) throws IOException {
+    public ResponseEntity deleteFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -119,7 +132,11 @@ public class FileController {
             return ResponseEntity.status(404).body("file not found");
         }
         Path p = Paths.get(f.getUrl());
-        Files.deleteIfExists(p);
+        try {
+            Files.deleteIfExists(p);
+        } catch (IOException e) {
+            return ResponseEntity.status(409).body("IO has problem right now, please try again later");
+        }
 
         fileDAO.deleteFile(f);
         return ResponseEntity.noContent().build();
