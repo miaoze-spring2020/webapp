@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 
 @RestController
@@ -37,8 +34,6 @@ public class FileController {
     @Autowired
     @Qualifier("s3Utils")
     S3Utils s3Utils;
-
-    private static final String UPLOAD_DIR = "attached_files/";
 
     @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
@@ -64,12 +59,11 @@ public class FileController {
             return ResponseEntity.status(422).body("invalid file format: " + suffix);
         }
         String newfilename = b.getId() + "_" + filename;
-        String keyName = UPLOAD_DIR + newfilename;
 
         //upload file
         String url = null;
         try {
-            url = s3Utils.uploadFile(keyName, file);
+            url = s3Utils.uploadFile(newfilename, file);
             if (url.equals("nobucket")) {
                 return ResponseEntity.status(405).body("Failed to upload file to server side: " + "bucket does not exist");
             }
@@ -88,7 +82,7 @@ public class FileController {
         try {
             f.setSize(file.getBytes().length);
         } catch (IOException e) {
-            s3Utils.deleteFile(keyName);
+            s3Utils.deleteFile(newfilename);
             return ResponseEntity.status(405).body("Failed to store file metadata, upload rollback: " + e.getMessage());
         }
         f.setOwner_id(u);
@@ -135,7 +129,7 @@ public class FileController {
         }
         String newfilename = b.getId() + "_" + f.getFile_name();
 
-        s3Utils.deleteFile(UPLOAD_DIR + newfilename);
+        s3Utils.deleteFile(newfilename);
         fileDAO.deleteFile(f);
         return ResponseEntity.noContent().build();
     }

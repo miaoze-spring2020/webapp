@@ -6,11 +6,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,24 +20,21 @@ public class S3Utils {
 //    AWSAccessKeyId=AKIAJ7VVI7PF3IZCOYDQ
 //    AWSSecretKey=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
 
-    //    private String accessKey = System.getenv("AWS_ACCESS_KEY");
-    private String accessKey = "AKIAJ7VVI7PF3IZCOYDQ";
-    //    private String secretKey = System.getenv("AWS_SECRET_KEY");
-    private String secretKey = "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";
-    //    private String bucketName = System.getenv("BUCKET_NAME");
-    private String bucketName = "ass6test1000-mys3bucket-buz90t2lf5jv";
+    private String accessKey = System.getenv("AWS_ACCESS_KEY");
+    //    private String accessKey = "AKIAJ7VVI7PF3IZCOYDQ";
+    private String secretKey = System.getenv("AWS_SECRET_KEY");
+    //    private String secretKey = "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";
+    private String bucketName = System.getenv("BUCKET_NAME");
+    //    private String bucketName = "ass6test1000-mys3bucket-buz90t2lf5jv";
     private Regions region = Regions.US_EAST_1;
+    private static final String UPLOAD_DIR = "attached_files/";
 
 
     /**
-     * @return 1
-     * no bucket
-     * @return 2
-     * file exists
      * @return 0
      * upload success
      */
-    public String uploadFile(String keyName, MultipartFile file) throws IOException {
+    public String uploadFile(String uniqueFileName, MultipartFile file) throws IOException {
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -56,20 +50,20 @@ public class S3Utils {
 
         //upload file
         //validate if file exists
-        if(s3client.doesObjectExist(bucketName, keyName)) return "exist";
+        if (s3client.doesObjectExist(bucketName, UPLOAD_DIR + uniqueFileName)) return "exist";
 
         InputStream stream = file.getInputStream();
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(file.getContentType());
 
-        s3client.putObject(new PutObjectRequest(bucketName, keyName, stream, metadata));
+        s3client.putObject(new PutObjectRequest(bucketName, UPLOAD_DIR + uniqueFileName, stream, metadata));
         if (stream != null) {
             stream.close();
         }
-        return s3client.getUrl(bucketName,keyName).toString();
+        return s3client.getUrl(bucketName, uniqueFileName).toString();
     }
 
-    public void deleteFile(String keyName) {
+    public void deleteFile(String uniqueFileName) {
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -78,7 +72,7 @@ public class S3Utils {
                 .withRegion(region)
                 .build();
 
-        s3client.deleteObject(bucketName, keyName);
+        s3client.deleteObject(bucketName, UPLOAD_DIR + uniqueFileName);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.me.controller;
 
 import com.me.dao.BillDAO;
+import com.me.dao.FileDAO;
 import com.me.pojo.Bill;
 import com.me.pojo.File;
 import com.me.pojo.User;
 import com.me.utils.JSONUtils;
+import com.me.utils.S3Utils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -21,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/v1/bill/","/v1/bill/*","/v1/bill*"})
+@RequestMapping({"/v1/bill/", "/v1/bill/*", "/v1/bill*"})
 public class BillController {
 
     @Autowired
@@ -31,6 +33,10 @@ public class BillController {
     @Autowired
     @Qualifier("billDAO")
     BillDAO billDAO;
+
+    @Autowired
+    @Qualifier("s3Utils")
+    S3Utils s3Utils;
 
     @RequestMapping(value = "/v1/bill/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity createBill(@RequestBody String bill, @RequestHeader(value = "Authorization", required = false) String auth) {
@@ -55,7 +61,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bills", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getBills(@RequestHeader(value = "Authorization",required = false) String auth) {
+    public ResponseEntity getBills(@RequestHeader(value = "Authorization", required = false) String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -70,7 +76,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getBill(@RequestHeader(value = "Authorization",required = false) String auth, @PathVariable("id") String id) {
+    public ResponseEntity getBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -115,13 +121,8 @@ public class BillController {
             return ResponseEntity.status(404).body("no such bill");
         }
         File f = b.getAttachment();
-        if(f != null){
-            Path p = Paths.get(f.getUrl());
-            try {
-                Files.deleteIfExists(p);
-            } catch (IOException e) {
-                return ResponseEntity.status(405).body("Failed to delete file on server side");
-            }
+        if (f != null) {
+            s3Utils.deleteFile(b.getId() + "_" + f.getFile_name());
         }
         billDAO.deleteBill(b);
         return ResponseEntity.noContent().build();
