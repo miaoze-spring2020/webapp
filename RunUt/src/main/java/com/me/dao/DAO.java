@@ -17,7 +17,11 @@ public class DAO {
 
     private static final ThreadLocal sessionThread = new ThreadLocal();
 
-    private static final SessionFactory sessionfactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    private static final SessionFactory sessionfactory = new Configuration()
+//            .setProperty("hibernate.connection.username", System.getenv("DATABASE_USERNAME"))
+//            .setProperty("hibernate.connection.password", System.getenv("DATABASE_PASSWORD"))
+//            .setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"))
+            .configure("hibernate.cfg.xml").buildSessionFactory();
 
     protected DAO() {
     }
@@ -33,7 +37,7 @@ public class DAO {
     }
 
     protected static void begin() {
-        if(!getSession().getTransaction().isActive()) getSession().beginTransaction();
+        if (!getSession().getTransaction().isActive()) getSession().beginTransaction();
     }
 
     protected static void commit() {
