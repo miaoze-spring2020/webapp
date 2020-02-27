@@ -18,9 +18,9 @@ public class DAO {
     private static final ThreadLocal sessionThread = new ThreadLocal();
 
     private static final SessionFactory sessionfactory = new Configuration()
-//            .setProperty("hibernate.connection.username", System.getenv("DATABASE_USERNAME"))
-//            .setProperty("hibernate.connection.password", System.getenv("DATABASE_PASSWORD"))
-//            .setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"))
+            .setProperty("hibernate.connection.url", "jdbc:mysql://" + System.getenv("DB_HOSTNAME") + ":3306/csye6225")
+            .setProperty("hibernate.connection.username", System.getenv("DB_USERNAME"))
+            .setProperty("hibernate.connection.password", System.getenv("DB_PASSWORD"))
             .configure("hibernate.cfg.xml").buildSessionFactory();
 
     protected DAO() {
