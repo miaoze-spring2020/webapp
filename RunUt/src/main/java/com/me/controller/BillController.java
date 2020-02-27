@@ -121,10 +121,11 @@ public class BillController {
             return ResponseEntity.status(404).body("no such bill");
         }
         File f = b.getAttachment();
+        String x = f.getId();
         if (f != null) {
-            s3Utils.deleteFile(b.getId() + "_" + f.getFile_name());
+            s3Utils.deleteFile(id + "_" + f.getFile_name());
         }
         billDAO.deleteBill(b);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(200).body(x);
     }
 }

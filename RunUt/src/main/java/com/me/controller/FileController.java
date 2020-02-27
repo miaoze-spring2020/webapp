@@ -127,7 +127,7 @@ public class FileController {
         if (f == null) {
             return ResponseEntity.status(404).body("file not found");
         }
-        String newfilename = b.getId() + "_" + f.getFile_name();
+        String newfilename = bid + "_" + f.getFile_name();
 
         s3Utils.deleteFile(newfilename);
         fileDAO.deleteFile(f);

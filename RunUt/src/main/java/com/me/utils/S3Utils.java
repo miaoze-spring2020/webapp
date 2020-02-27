@@ -16,16 +16,13 @@ import java.io.InputStream;
 
 @Component("s3Utils")
 public class S3Utils {
-    //dev test:
-//    AWSAccessKeyId=AKIAJ7VVI7PF3IZCOYDQ
-//    AWSSecretKey=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
 
     private String accessKey = System.getenv("AWS_ACCESS_KEY");
     //    private String accessKey = "AKIAJ7VVI7PF3IZCOYDQ";
     private String secretKey = System.getenv("AWS_SECRET_KEY");
     //    private String secretKey = "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";
     private String bucketName = System.getenv("BUCKET_NAME");
-    //    private String bucketName = "ass6test1000-mys3bucket-buz90t2lf5jv";
+    //    private String bucketName = "ass6test10000-mys3bucket-1296uof2jlx4n";
     private Regions region = Regions.US_EAST_1;
     private static final String UPLOAD_DIR = "attached_files/";
 
