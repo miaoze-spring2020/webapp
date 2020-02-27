@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="ControllerTest" time="1.028" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="ControllerTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -61,12 +61,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="ControllerTest" name="testgetFile" time="0.475"/>
-  <testcase classname="ControllerTest" name="testGetBills" time="0.13"/>
-  <testcase classname="ControllerTest" name="testPutBill" time="0.095"/>
-  <testcase classname="ControllerTest" name="testGetUser" time="0.086"/>
-  <testcase classname="ControllerTest" name="testAuthorization" time="0.017"/>
-  <testcase classname="ControllerTest" name="testCreateBill" time="0.101"/>
-  <testcase classname="ControllerTest" name="testCreateFile" time="0.091"/>
-  <testcase classname="ControllerTest" name="testCreateUser" time="0.033"/>
+  <testcase classname="ControllerTest" name="test" time="0.002"/>
 </testsuite>
