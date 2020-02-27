@@ -1,7 +1,6 @@
 package com.me.controller;
 
 import com.me.dao.BillDAO;
-import com.me.dao.FileDAO;
 import com.me.pojo.Bill;
 import com.me.pojo.File;
 import com.me.pojo.User;
@@ -15,10 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -121,11 +116,10 @@ public class BillController {
             return ResponseEntity.status(404).body("no such bill");
         }
         File f = b.getAttachment();
-        String x = f.getId();
         if (f != null) {
             s3Utils.deleteFile(id + "_" + f.getFile_name());
         }
         billDAO.deleteBill(b);
-        return ResponseEntity.status(200).body(x);
+        return ResponseEntity.noContent().build();
     }
 }
