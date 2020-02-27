@@ -23,7 +23,7 @@ public class S3Utils {
     //    private String secretKey = "juGg5ZxHWR3Blw264gqhJDmQdTGfMFsIyavuX4rO";
     private String bucketName = System.getenv("BUCKET_NAME");
     //    private String bucketName = "ass6test10000-mys3bucket-1296uof2jlx4n";
-    private Regions region = Regions.US_EAST_1;
+    private String region = System.getenv("AWS_REGION");
     private static final String UPLOAD_DIR = "attached_files/";
 
 
@@ -38,6 +38,7 @@ public class S3Utils {
                 .standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(region)
+                .withForceGlobalBucketAccessEnabled(true)
                 .build();
 
         //create bucket

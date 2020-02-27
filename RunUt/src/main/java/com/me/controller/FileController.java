@@ -36,7 +36,7 @@ public class FileController {
     S3Utils s3Utils;
 
     @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity createFile(@RequestHeader("Authorization") String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
+    public ResponseEntity createFile(@RequestHeader(name = "Authorization", required = false) String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -96,7 +96,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity getFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+    public ResponseEntity getFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
@@ -113,7 +113,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteFile(@RequestHeader("Authorization") String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+    public ResponseEntity deleteFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
             return ResponseEntity.status(401).body("unauthorized user");
