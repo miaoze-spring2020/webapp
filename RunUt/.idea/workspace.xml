@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="assignment3" />
+      <artifact name="RunUt:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/assignment3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/utils/S3Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/utils/S3Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/RunUt.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/ControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/ControllerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-ControllerTest.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,9 +203,7 @@
       </ConfigurationWrapper>
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="assignment3" />
-        </option>
+        <option name="BuildArtifacts" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -265,7 +268,8 @@
       <workItem from="1581983391598" duration="1814000" />
       <workItem from="1582386279066" duration="785000" />
       <workItem from="1582599489170" duration="1344000" />
-      <workItem from="1582660742230" duration="35662000" />
+      <workItem from="1582660742230" duration="36340000" />
+      <workItem from="1583078441918" duration="5971000" />
     </task>
     <servers />
   </component>
@@ -337,50 +341,50 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="971" y="289" width="378" height="623" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1054@0.0.1920.1054" timestamp="1581444027280" />
-    <state x="1130" y="206" width="529" height="424" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1580242992673">
+    <state x="1130" y="206" width="529" height="424" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1583084184537">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="1130" y="206" width="529" height="424" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580242992673" />
+    <state x="1130" y="206" width="529" height="424" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1583084184537" />
     <state x="929" y="187" width="777" height="635" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1580326464650">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="929" y="187" width="777" height="635" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580326464650" />
-    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl" timestamp="1581100646589">
+    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl" timestamp="1583084195670">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1581100646589" />
-    <state width="1294" height="311" key="GridCell.Tab.0.bottom" timestamp="1582764626724">
+    <state x="1074" y="248" width="428" height="481" key="FileChooserDialogImpl/0.0.1920.1054@0.0.1920.1054" timestamp="1583084195670" />
+    <state width="1294" height="311" key="GridCell.Tab.0.bottom" timestamp="1582837141255">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626724" />
-    <state width="1294" height="311" key="GridCell.Tab.0.center" timestamp="1582764626721">
+    <state width="1294" height="311" key="GridCell.Tab.0.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141255" />
+    <state width="1294" height="311" key="GridCell.Tab.0.center" timestamp="1582837141254">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626721" />
-    <state width="1294" height="311" key="GridCell.Tab.0.left" timestamp="1582764626719">
+    <state width="1294" height="311" key="GridCell.Tab.0.center/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141254" />
+    <state width="1294" height="311" key="GridCell.Tab.0.left" timestamp="1582837141253">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626719" />
-    <state width="1294" height="311" key="GridCell.Tab.0.right" timestamp="1582764626722">
+    <state width="1294" height="311" key="GridCell.Tab.0.left/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141253" />
+    <state width="1294" height="311" key="GridCell.Tab.0.right" timestamp="1582837141254">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626722" />
-    <state width="1294" height="311" key="GridCell.Tab.1.bottom" timestamp="1582764626731">
+    <state width="1294" height="311" key="GridCell.Tab.0.right/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141254" />
+    <state width="1294" height="311" key="GridCell.Tab.1.bottom" timestamp="1582837141257">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626731" />
-    <state width="1294" height="311" key="GridCell.Tab.1.center" timestamp="1582764626727">
+    <state width="1294" height="311" key="GridCell.Tab.1.bottom/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141257" />
+    <state width="1294" height="311" key="GridCell.Tab.1.center" timestamp="1582837141256">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626727" />
-    <state width="1294" height="311" key="GridCell.Tab.1.left" timestamp="1582764626726">
+    <state width="1294" height="311" key="GridCell.Tab.1.center/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141256" />
+    <state width="1294" height="311" key="GridCell.Tab.1.left" timestamp="1582837141255">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626726" />
-    <state width="1294" height="311" key="GridCell.Tab.1.right" timestamp="1582764626729">
+    <state width="1294" height="311" key="GridCell.Tab.1.left/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141255" />
+    <state width="1294" height="311" key="GridCell.Tab.1.right" timestamp="1582837141256">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state width="1294" height="311" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1582764626729" />
+    <state width="1294" height="311" key="GridCell.Tab.1.right/0.0.1920.1054@0.0.1920.1054" timestamp="1582837141256" />
     <state width="700" height="201" key="GridCell.Tab.2.bottom" timestamp="1581111525226">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
@@ -401,10 +405,10 @@
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
     <state x="744" y="348" width="928" height="681" key="Maven.ArtifactSearchDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1580335520812" />
-    <state x="886" y="0" width="1028" height="842" key="SettingsEditor" timestamp="1581365338872">
+    <state x="389" y="212" width="1028" height="842" key="SettingsEditor" timestamp="1583084220610">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
-    <state x="886" y="0" width="1028" height="842" key="SettingsEditor/0.0.1920.1054@0.0.1920.1054" timestamp="1581365338872" />
+    <state x="389" y="212" width="1028" height="842" key="SettingsEditor/0.0.1920.1054@0.0.1920.1054" timestamp="1583084220610" />
     <state x="883" y="200" width="876" height="613" key="dock-window-1" timestamp="1580254569483">
       <screen x="0" y="0" width="1920" height="1054" />
     </state>
