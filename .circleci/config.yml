@@ -1,14 +1,62 @@
-version: 2
-jobs:          
-  pr_check:
+version: 2.1
+executors:
+  ubuntu_executor:
+    machine:
+      image: ubuntu-1604:201903-01
+  test_executor:
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD: 'mzc961031'
+      environment:
+          MYSQL_ROOT_PASSWORD: "mzc961031"
           MYSQL_DATABASE: cloudDB
           MYSQL_ROOT_HOST: 127.0.0.1
           MYSQL_USER: root
+
+jobs:
+  mvntest:
+    executor: test_executor
+    steps:
+      - checkout
+      - run:
+          name: maven test
+          working_directory: ~/project/RunUt
+          command: mvn test
+  
+  build_artifact:
+    executor: test_executor
+    steps:
+      - checkout
+      - run:
+          name: build artifact in target/jar
+          working_directory: ~/project/RunUt
+          command: mvn package
+
+  upload_deploy:
+    executor: ubuntu_executor
+    steps:
+      - checkout
+      - run:
+          name: install aws
+          command: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+      - run:
+          name: configure aws profile
+          command: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile circleci
+          aws configure set aws_secret_access_key $AWS_SECRET_KEY --profile circleci
+          aws configure set region $AWS_REGION --profile circleci
+      - run:
+          name: upload to s3
+          command: |
+          aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/IdeaProjects/webjar --profile circleci
+
+    
+    
+  pr_check:
+    executor: test_executor
     steps:
       - checkout
       - run:
@@ -21,7 +69,9 @@ jobs:
           command: mvn test
 
 workflows:
-  version: 2
+  build-workflow:
+    jobs:
+      - setup_aws
   pr-check-workflow:
     jobs:
       - pr_check

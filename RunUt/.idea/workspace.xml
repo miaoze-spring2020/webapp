@@ -8,12 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc87ae48-dae9-4096-bb00-6bd966df14c1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/dao/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/ControllerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/ControllerTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-ControllerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-ControllerTest.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +263,7 @@
       <workItem from="1582386279066" duration="785000" />
       <workItem from="1582599489170" duration="1344000" />
       <workItem from="1582660742230" duration="36340000" />
-      <workItem from="1583078441918" duration="21757000" />
+      <workItem from="1583078441918" duration="25843000" />
     </task>
     <servers />
   </component>
