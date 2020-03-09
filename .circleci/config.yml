@@ -34,7 +34,7 @@ jobs:
             mkdir ~/project/bundle
             mv ~/project/RunUt/target/webapp.jar ~/project/bundle
             mv ~/project/appspec.yml ~/project/bundle
-            mv ~/project/scipts ~/poject/bundle
+            mv ~/project/scripts ~/project/bundle
       - run:
           name: install aws
           command: |
@@ -70,10 +70,10 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      - mvntest
-      - upload_deploy:
-          requires:
-            - mvntest
+      # - mvntest
+      - upload_deploy
+          # requires:
+          #   - mvntest
   # pr-check-workflow:
   #   jobs:
   #     - pr_check
