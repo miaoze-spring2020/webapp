@@ -34,7 +34,7 @@ jobs:
             mkdir ~/project/bundle
             mv ~/project/RunUt/target/webapp.jar ~/project/bundle
             mv ~/project/appspec.yml ~/project/bundle
-            mv -r ~/project/scipts ~/poject/bundle
+            mv ~/project/scipts ~/poject/bundle
       - run:
           name: install aws
           command: |
