@@ -18,9 +18,8 @@ jobs:
       - checkout
       - run:
           name: maven test
-          command: |
-            ls -a
-            mvn test
+          working_directory: ~/project/RunUt
+          command: mvn test
 
   upload_deploy:
     executor: deploy_executor
@@ -28,6 +27,7 @@ jobs:
       - checkout
       - run:
           name: build artifact
+          working_directory: ~/project/RunUt
           command: mvn package
       - run:
           name: move artifact and scripts appspec
@@ -61,9 +61,11 @@ jobs:
       - checkout
       - run:
           name: compile
+          working_directory: ~/project/RunUt
           command: mvn compile
       - run:
           name: test
+          working_directory: ~/project/RunUt
           command: mvn test
 
 workflows:
