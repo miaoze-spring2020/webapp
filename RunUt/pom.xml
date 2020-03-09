@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
+        <finalName>webapp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

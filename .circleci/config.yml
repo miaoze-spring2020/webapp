@@ -1,12 +1,10 @@
 version: 2.1
 executors:
-  ubuntu_executor:
-    machine:
-      image: ubuntu-1604:201903-01
-  test_executor:
+  deploy_executor:
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/mysql:5.7
+      working_directory: ~/project/RunUt
       environment:
           MYSQL_ROOT_PASSWORD: "mzc961031"
           MYSQL_DATABASE: cloudDB
@@ -15,27 +13,27 @@ executors:
 
 jobs:
   mvntest:
-    executor: test_executor
+    executor: deploy_executor
     steps:
       - checkout
       - run:
           name: maven test
-          working_directory: ~/project/RunUt
           command: mvn test
-  
-  build_artifact:
-    executor: test_executor
+
+  upload_deploy:
+    executor: deploy_executor
     steps:
       - checkout
       - run:
-          name: build artifact in target/jar
-          working_directory: ~/project/RunUt
+          name: build artifact
           command: mvn package
-
-  upload_deploy:
-    executor: ubuntu_executor
-    steps:
-      - checkout
+      - run:
+          name: move artifact and scripts appspec
+          command: |
+          mkdir ~/project/bundle
+          mv ~/project/RunUt/target/webapp.jar ~/project/bundle
+          mv ~/project/appspec ~/project/bundle
+          mv -r ~/project/scipts ~/poject/bundle
       - run:
           name: install aws
           command: |
@@ -50,28 +48,27 @@ jobs:
           aws configure set region $AWS_REGION --profile circleci
       - run:
           name: upload to s3
-          command: |
-          aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/IdeaProjects/webjar --profile circleci
-
-    
+          command: aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/project/bundle --profile circleci
+      - run:
+          name: create deploy
+          command: aws deploy create-deployment --application-name $CODEDEPLOY_APPNAME --s3-location bucket=$CODEDEPLOY_BUCKETNAME,bundleType=zip,key=$BUCKET_KEYNAME --deployment-group-name $CODEDEPLOY_GROUPNAME --description "cicd deploy" --profile circleci
     
   pr_check:
-    executor: test_executor
+    executor: deploy_executor
     steps:
       - checkout
       - run:
           name: compile
-          working_directory: ~/project/RunUt
           command: mvn compile
       - run:
           name: test
-          working_directory: ~/project/RunUt
           command: mvn test
 
 workflows:
   build-workflow:
     jobs:
-      - setup_aws
+      - mvntest
+      - upload_deploy
   pr-check-workflow:
     jobs:
       - pr_check
