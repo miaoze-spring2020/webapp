@@ -14,6 +14,7 @@ executors:
 jobs:
   mvntest:
     executor: deploy_executor
+    working_directory: ~/project/RunUt
     steps:
       - checkout
       - run:
