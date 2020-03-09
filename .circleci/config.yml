@@ -6,7 +6,7 @@ executors:
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: mzc961031
-          MYSQL_DATABASE: cloudDB
+          MYSQL_DATABASE: csye6225
           MYSQL_ROOT_HOST: 127.0.0.1
           MYSQL_USER: root
 
@@ -47,6 +47,7 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile circleci
             aws configure set aws_secret_access_key $AWS_SECRET_KEY --profile circleci
             aws configure set region $AWS_REGION --profile circleci
+            aws configure set output json --profile circleci
       - run:
           name: upload to s3
           command: aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/project/bundle --profile circleci
