@@ -4,7 +4,6 @@ executors:
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/mysql:5.7
-    working_directory: ~/project/RunUt
     environment:
       MYSQL_ROOT_PASSWORD: "mzc961031"
       MYSQL_DATABASE: cloudDB
@@ -14,7 +13,7 @@ executors:
 jobs:
   mvntest:
     executor: deploy_executor
-    working_directory: ~/project/RunUt
+    working_directory: ~/project
     steps:
       - checkout
       - run:
