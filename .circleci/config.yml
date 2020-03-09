@@ -4,11 +4,11 @@ executors:
     docker:
       - image: circleci/openjdk:8u171-jdk
       - image: circleci/mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: mzc961031
-      MYSQL_DATABASE: cloudDB
-      MYSQL_ROOT_HOST: 127.0.0.1
-      MYSQL_USER: root
+        environment:
+          MYSQL_ROOT_PASSWORD: mzc961031
+          MYSQL_DATABASE: cloudDB
+          MYSQL_ROOT_HOST: 127.0.0.1
+          MYSQL_USER: root
 
 jobs:
   mvntest:
