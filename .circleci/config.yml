@@ -19,7 +19,9 @@ jobs:
       - checkout
       - run:
           name: maven test
-          command: mvn test
+          command: |
+            ls -a
+            mvn test
 
   upload_deploy:
     executor: deploy_executor
