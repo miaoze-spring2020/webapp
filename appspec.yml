@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: ./RunUt-1.0-SNAPSHOT.jar
+  - source: ./webapp.jar
     destination: /tmp
 hooks:
   AfterInstall:
