@@ -48,6 +48,7 @@ jobs:
             aws configure set aws_secret_access_key $AWS_SECRET_KEY --profile circleci
             aws configure set region $AWS_REGION --profile circleci
             aws configure set output json --profile circleci
+            sudo update-ca-trust force-enable
       - run:
           name: upload to s3
           command: aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/project/bundle --profile circleci
