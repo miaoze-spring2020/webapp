@@ -2,10 +2,10 @@ version: 2.1
 executors:
   deploy_executor:
     docker:
-      - image: circleci/openjdk:8-jdk-stretch
+      - image: circleci/openjdk:11-jdk
       - image: circleci/mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: "mzc961031"
+      MYSQL_ROOT_PASSWORD: mzc961031
       MYSQL_DATABASE: cloudDB
       MYSQL_ROOT_HOST: 127.0.0.1
       MYSQL_USER: root
@@ -13,13 +13,12 @@ executors:
 jobs:
   mvntest:
     executor: deploy_executor
-    working_directory: ~/project
     steps:
       - checkout
       - run:
           name: maven test
           working_directory: ~/project/RunUt
-          command: mvn test
+          command: mvn -e test
 
   upload_deploy:
     executor: deploy_executor
