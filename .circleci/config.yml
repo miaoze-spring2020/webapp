@@ -41,7 +41,6 @@ jobs:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-            sudo apt-get install -y ca-certificates
       - run:
           name: configure aws profile
           command: |
@@ -49,13 +48,12 @@ jobs:
             aws configure set aws_secret_access_key $AWS_SECRET_KEY --profile circleci
             aws configure set region $AWS_REGION --profile circleci
             aws configure set output json --profile circleci
-            update-ca-trust force-enable
       - run:
           name: upload to s3
           command: aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/project/bundle --profile circleci
       - run:
           name: create deploy
-          command: aws deploy create-deployment --application-name $CODEDEPLOY_APPNAME --s3-location bucket=$CODEDEPLOY_BUCKETNAME,bundleType=zip,key=$BUCKET_KEYNAME --deployment-group-name $CODEDEPLOY_GROUPNAME --description "cicd deploy" --profile circleci
+          command: aws deploy create-deployment --application-name $CODEDEPLOY_APPNAME --s3-location bucket=$CODEDEPLOY_BUCKETNAME,bundleType=zip,key=$BUCKET_KEYNAME --deployment-group-name $CODEDEPLOY_GROUPNAME --description "cicd deploy" --profile circleci --debug
     
   pr_check:
     executor: deploy_executor
