@@ -75,6 +75,6 @@ workflows:
       - upload_deploy:
           requires:
             - mvntest
-  pr-check-workflow:
-    jobs:
-      - pr_check
+  # pr-check-workflow:
+  #   jobs:
+  #     - pr_check
