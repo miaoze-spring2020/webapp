@@ -39,7 +39,7 @@ public class ControllerTest {
 
     @Before
     public void before() throws Exception {
-        String url = "/v1/user";
+        String url = "/user";
         user = new User();
         user.setEmail_address("test@sun.com");
         user.setPassword("Abcd1234.");
@@ -56,7 +56,7 @@ public class ControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 
-        String burl = "/v1/bill/";
+        String burl = "/bill/";
 
         bill = new Bill();
         bill.setCategories(new HashSet<>());
@@ -75,7 +75,7 @@ public class ControllerTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        String url = "/v1/user";
+        String url = "/user";
 
         mock.perform(post(url)
                 .accept(MediaType.APPLICATION_JSON)
@@ -91,7 +91,7 @@ public class ControllerTest {
     @Test
     @Rollback
     public void testCreateBill() throws Exception {
-        String url = "/v1/bill/";
+        String url = "/bill/";
 
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
@@ -109,7 +109,7 @@ public class ControllerTest {
 
     @Test
     public void testAuthorization() throws Exception {
-        String url = "/v1/bills";
+        String url = "/bills";
 
         mock.perform(get(url))
                 .andExpect(status().isUnauthorized())
@@ -119,7 +119,7 @@ public class ControllerTest {
 
     @Test
     public void testGetBills() throws Exception {
-        String url = "/v1/bills";
+        String url = "/bills";
 
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
@@ -137,7 +137,7 @@ public class ControllerTest {
 
     @Test
     public void testGetUser() throws Exception {
-        String url = "/v1/user/self";
+        String url = "/user/self";
 
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
@@ -156,7 +156,7 @@ public class ControllerTest {
     @Test
     @Rollback
     public void testPutBill() throws Exception {
-        String url = "/v1/bill/123";
+        String url = "/bill/123";
 
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
@@ -175,7 +175,7 @@ public class ControllerTest {
     @Test
     @Rollback
     public void testCreateFile() throws Exception {
-        String url = "/v1/bill/"+bill.getId()+"/file";
+        String url = "/bill/"+bill.getId()+"/file";
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 
@@ -191,7 +191,7 @@ public class ControllerTest {
     @Test
     @Rollback
     public void testgetFile() throws Exception {
-        String url = "/v1/bill/"+bill.getId()+"/file/test";
+        String url = "/bill/"+bill.getId()+"/file/test";
         String auth = user.getEmail_address() + ":" + user.getPassword();
         String base = new String(Base64.encode(auth.getBytes()));
 

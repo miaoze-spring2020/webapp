@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/user/**")
+@RequestMapping("/user/**")
 public class UserController {
     @Autowired
     @Qualifier("jsonUtils")
@@ -23,7 +23,7 @@ public class UserController {
     @Qualifier("userDAO")
     UserDAO userDAO;
 
-    @RequestMapping(value = "/v1/user", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity createUser(@RequestBody String user) {
 
         JSONObject js = new JSONObject(new JSONTokener((new JSONObject(user)).toString()));
@@ -66,7 +66,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/v1/user/self", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/user/self", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUserInfo(@RequestHeader("Authorization") String auth) {
         User u = ju.autherize(auth);
         if (u != null) {
@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.status(401).body("Unauthorized user");
     }
 
-    @RequestMapping(value = "/v1/user/self", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/user/self", method = RequestMethod.PUT, consumes = "application/json")
     public ResponseEntity updateUserInfo(@RequestBody String modi, @RequestHeader("Authorization") String auth) {
         JSONObject js = new JSONObject(new JSONTokener((new JSONObject(modi)).toString()));
 
