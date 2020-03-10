@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("v1/bill/*/file/**")
+@RequestMapping("/bill/*/file/**")
 public class FileController {
     @Autowired
     @Qualifier("jsonUtils")
@@ -35,7 +35,7 @@ public class FileController {
     @Qualifier("s3Utils")
     S3Utils s3Utils;
 
-    @RequestMapping(value = "v1/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createFile(@RequestHeader(name = "Authorization", required = false) String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -95,7 +95,7 @@ public class FileController {
 
     }
 
-    @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -112,7 +112,7 @@ public class FileController {
         return ResponseEntity.ok().body(f.toJSON().toString());
     }
 
-    @RequestMapping(value = "v1/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
     public ResponseEntity deleteFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
         User u = ju.autherize(auth);
         if (u == null) {
