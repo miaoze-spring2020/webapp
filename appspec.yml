@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: ./webapp.jar
+    destination: /tmp
+hooks:
+  AfterInstall:
+    - location: scripts/startapp.sh
+      timeout: 60
+      runas: ubuntu

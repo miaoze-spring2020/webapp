@@ -1,14 +1,62 @@
-version: 2
-jobs:          
-  pr_check:
+version: 2.1
+executors:
+  deploy_executor:
     docker:
-      - image: circleci/openjdk:8-jdk-stretch
+      - image: circleci/openjdk:8u171-jdk
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ROOT_PASSWORD: 'mzc961031'
-          MYSQL_DATABASE: cloudDB
+          MYSQL_ROOT_PASSWORD: mzc961031
+          MYSQL_DATABASE: csye6225
           MYSQL_ROOT_HOST: 127.0.0.1
           MYSQL_USER: root
+
+jobs:
+  mvntest:
+    executor: deploy_executor
+    steps:
+      - checkout
+      - run:
+          name: maven test
+          working_directory: ~/project/RunUt
+          command: mvn test
+
+  upload_deploy:
+    executor: deploy_executor
+    steps:
+      - checkout
+      - run:
+          name: build artifact
+          working_directory: ~/project/RunUt
+          command: mvn package
+      - run:
+          name: move artifact and scripts appspec
+          command: |
+            mkdir ~/project/bundle
+            mv ~/project/RunUt/target/webapp.jar ~/project/bundle
+            mv ~/project/appspec.yml ~/project/bundle
+            mv ~/project/scripts ~/project/bundle
+      - run:
+          name: install aws
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: configure aws profile
+          command: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY --profile circleci
+            aws configure set aws_secret_access_key $AWS_SECRET_KEY --profile circleci
+            aws configure set region $AWS_REGION --profile circleci
+            aws configure set output json --profile circleci
+      - run:
+          name: upload to s3
+          command: aws deploy push --application-name $CODEDEPLOY_APPNAME --s3-location s3://$CODEDEPLOY_BUCKETNAME/$BUCKET_KEYNAME --source ~/project/bundle --profile circleci
+      - run:
+          name: create deploy
+          command: aws deploy create-deployment --application-name $CODEDEPLOY_APPNAME --s3-location bucket=$CODEDEPLOY_BUCKETNAME,bundleType=zip,key=$BUCKET_KEYNAME --deployment-group-name $CODEDEPLOY_GROUPNAME --description "cicd deploy" --profile circleci --debug
+    
+  pr_check:
+    executor: deploy_executor
     steps:
       - checkout
       - run:
@@ -21,7 +69,12 @@ jobs:
           command: mvn test
 
 workflows:
-  version: 2
+  build-workflow:
+    jobs:
+      - mvntest
+      - upload_deploy:
+          requires:
+            - mvntest
   pr-check-workflow:
     jobs:
       - pr_check
