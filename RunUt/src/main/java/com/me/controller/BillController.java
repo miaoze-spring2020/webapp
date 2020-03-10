@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/v1/bill/", "/v1/bill/*", "/v1/bill*"})
+@RequestMapping({"/bill/", "/bill/*", "/bill*"})
 public class BillController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class BillController {
     @Qualifier("s3Utils")
     S3Utils s3Utils;
 
-    @RequestMapping(value = "/v1/bill/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/bill/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity createBill(@RequestBody String bill, @RequestHeader(value = "Authorization", required = false) String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -55,7 +55,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/v1/bills", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/bills", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBills(@RequestHeader(value = "Authorization", required = false) String auth) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -70,7 +70,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/bill/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -83,7 +83,7 @@ public class BillController {
         return ResponseEntity.status(404).body("No such Bill");
     }
 
-    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/bill/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public ResponseEntity updateBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id, @RequestBody String modi) {
         User u = ju.autherize(auth);
         if (u == null) {
@@ -105,7 +105,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/v1/bill/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
         User u = ju.autherize(auth);
         if (u == null) {
