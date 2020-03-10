@@ -18,7 +18,7 @@ jobs:
       - run:
           name: maven test
           working_directory: ~/project/RunUt
-          command: mvn -e test
+          command: mvn test
 
   upload_deploy:
     executor: deploy_executor
@@ -41,7 +41,6 @@ jobs:
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-            python --version
       - run:
           name: configure aws profile
           command: |
@@ -72,10 +71,10 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      # - mvntest
-      - upload_deploy
-          # requires:
-          #   - mvntest
-  # pr-check-workflow:
-  #   jobs:
-  #     - pr_check
+      - mvntest
+      - upload_deploy:
+          requires:
+            - mvntest
+  pr-check-workflow:
+    jobs:
+      - pr_check
