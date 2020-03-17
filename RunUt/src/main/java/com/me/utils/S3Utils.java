@@ -3,11 +3,13 @@ package com.me.utils;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.me.timer.TimerS3;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +18,10 @@ import java.io.InputStream;
 
 @Component("s3Utils")
 public class S3Utils {
+
+    @Autowired
+    @Qualifier("timerS3")
+    TimerS3 timerS3;
 
     private String accessKey = System.getenv("AWS_ACCESS_KEY");
     //    private String accessKey = "AKIAJ7VVI7PF3IZCOYDQ";
@@ -32,6 +38,7 @@ public class S3Utils {
      * upload success
      */
     public String uploadFile(String uniqueFileName, MultipartFile file) throws IOException {
+        timerS3.start();
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -43,6 +50,7 @@ public class S3Utils {
 
         //create bucket
         if (!s3client.doesBucketExist(bucketName)) {
+            timerS3.recordTimeToStatdD("upload.file.fail");
             return "nobucket";
         }
 
@@ -58,10 +66,12 @@ public class S3Utils {
         if (stream != null) {
             stream.close();
         }
+        timerS3.recordTimeToStatdD("upload.file.success");
         return s3client.getUrl(bucketName, uniqueFileName).toString();
     }
 
     public void deleteFile(String uniqueFileName) {
+        timerS3.start();
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         AmazonS3 s3client = AmazonS3ClientBuilder
@@ -71,6 +81,7 @@ public class S3Utils {
                 .build();
 
         s3client.deleteObject(bucketName, UPLOAD_DIR + uniqueFileName);
+        timerS3.recordTimeToStatdD("delete.file.success");
     }
 
 }
