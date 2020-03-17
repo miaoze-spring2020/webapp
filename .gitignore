@@ -26,10 +26,10 @@ hs_err_pid*
 # Files and directories created by pub
 .dart_tool/
 .packages
-/.idea/*
-/out/*
-/target/*
-/build/*
+.idea/
+out/
+target/
+build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 

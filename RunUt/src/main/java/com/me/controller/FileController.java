@@ -5,8 +5,10 @@ import com.me.dao.FileDAO;
 import com.me.pojo.Bill;
 import com.me.pojo.User;
 import com.me.pojo.File;
+import com.me.timer.TimerAPI;
 import com.me.utils.JSONUtils;
 import com.me.utils.S3Utils;
+import com.timgroup.statsd.StatsDClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -35,17 +37,30 @@ public class FileController {
     @Qualifier("s3Utils")
     S3Utils s3Utils;
 
+    @Autowired
+    private StatsDClient statsDClient;
+
+    @Autowired
+    @Qualifier("timerAPI")
+    TimerAPI timerAPI;
+
     @RequestMapping(value = "/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createFile(@RequestHeader(name = "Authorization", required = false) String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
+        timerAPI.start();
+        statsDClient.incrementCounter("endpoint.file.http.post");
+
         User u = ju.autherize(auth);
         if (u == null) {
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(401).body("unauthorized user");
         }
         Bill b = billDAO.getBill(id, u);
         if (b == null) {
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(404).body("bill not found");
         }
         if (file == null || file.isEmpty()) {
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(422).body("empty file");
         }
 
@@ -56,6 +71,7 @@ public class FileController {
 
         if (!suffix.equalsIgnoreCase("jpeg") && !suffix.equalsIgnoreCase("jpg")
                 && !suffix.equalsIgnoreCase("png") && !suffix.equalsIgnoreCase("pdf")) {
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(422).body("invalid file format: " + suffix);
         }
         String newfilename = b.getId() + "_" + filename;
@@ -65,12 +81,15 @@ public class FileController {
         try {
             url = s3Utils.uploadFile(newfilename, file);
             if (url.equals("nobucket")) {
+                timerAPI.recordTimeToStatdD("file.post.time");
                 return ResponseEntity.status(405).body("Failed to upload file to server side: " + "bucket does not exist");
             }
             if (url.equals("exist")) {
+                timerAPI.recordTimeToStatdD("file.post.time");
                 return ResponseEntity.status(405).body("Failed to upload file to server side: " + "file already exists");
             }
         } catch (IOException e) {
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(405).body("Failed to upload file to server side: " + e.getMessage());
         }
 
@@ -83,6 +102,7 @@ public class FileController {
             f.setSize(file.getBytes().length);
         } catch (IOException e) {
             s3Utils.deleteFile(newfilename);
+            timerAPI.recordTimeToStatdD("file.post.time");
             return ResponseEntity.status(405).body("Failed to store file metadata, upload rollback: " + e.getMessage());
         }
         f.setOwner_id(u);
@@ -91,46 +111,60 @@ public class FileController {
         billDAO.updateBill(b);
         fileDAO.addFile(f);
 
+        timerAPI.recordTimeToStatdD("file.post.time");
         return ResponseEntity.status(201).body(f.toJSON().toString());
 
     }
 
     @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+        timerAPI.start();
+        statsDClient.incrementCounter("endpoint.file.http.get");
         User u = ju.autherize(auth);
         if (u == null) {
+            timerAPI.recordTimeToStatdD("file.get.time");
             return ResponseEntity.status(401).body("unauthorized user");
         }
         Bill b = billDAO.getBill(bid, u);
         if (b == null) {
+            timerAPI.recordTimeToStatdD("file.get.time");
             return ResponseEntity.status(404).body("bill not found");
         }
         File f = fileDAO.getFile(fid, b, u);
         if (f == null) {
+            timerAPI.recordTimeToStatdD("file.get.time");
             return ResponseEntity.status(404).body("file not found");
         }
+        timerAPI.recordTimeToStatdD("file.get.time");
         return ResponseEntity.ok().body(f.toJSON().toString());
     }
 
     @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
     public ResponseEntity deleteFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+        timerAPI.start();
+        statsDClient.incrementCounter("endpoint.file.http.delete");
+
         User u = ju.autherize(auth);
         if (u == null) {
+            timerAPI.recordTimeToStatdD("file.delete.time");
             return ResponseEntity.status(401).body("unauthorized user");
         }
         Bill b = billDAO.getBill(bid, u);
         if (b == null) {
+            timerAPI.recordTimeToStatdD("file.delete.time");
             return ResponseEntity.status(404).body("bill not found");
         }
         b.setAttachment(null);
         File f = fileDAO.getFile(fid, b, u);
         if (f == null) {
+            timerAPI.recordTimeToStatdD("file.delete.time");
             return ResponseEntity.status(404).body("file not found");
         }
         String newfilename = bid + "_" + f.getFile_name();
 
         s3Utils.deleteFile(newfilename);
         fileDAO.deleteFile(f);
+        timerAPI.recordTimeToStatdD("file.delete.time");
         return ResponseEntity.noContent().build();
     }
 }
