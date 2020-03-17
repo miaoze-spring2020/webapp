@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private StatsDClient statsDClient;
 
-    static Logger logger = LogManager.getLogger(UserController.class);
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @Autowired
     @Qualifier("timerAPI")

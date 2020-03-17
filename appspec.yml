@@ -3,8 +3,15 @@ os: linux
 files:
   - source: ./webapp.jar
     destination: /tmp
+  - source: ./cloudwatch-config.json
+    destination: /tmp
 hooks:
   AfterInstall:
+    - location: scripts/startcloudwatchagent.sh
+      timeout: 30
+      runas: ubuntu
+  ApplicationStart:
     - location: scripts/startapp.sh
       timeout: 60
       runas: ubuntu
+    
