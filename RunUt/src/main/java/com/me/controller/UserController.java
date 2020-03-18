@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private StatsDClient statsDClient;
 
-    private static final Logger logger = LogManager.getLogger(UserController.class);
+    private final static Logger logger = LogManager.getLogger(UserController.class);
 
     @Autowired
     @Qualifier("timerAPI")
@@ -38,9 +38,7 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity createUser(@RequestBody String user) {
         timerAPI.start();
-        //log:
-        logger.info("this is info log");
-        logger.warn("this is warn log");
+        logger.info("enter create user api");
         statsDClient.incrementCounter("endpoint.user.http.post");
 
         JSONObject js = new JSONObject(new JSONTokener((new JSONObject(user)).toString()));
@@ -78,6 +76,8 @@ public class UserController {
             //create user:
             User u = userDAO.createUser(fn, ln, password, email);
             timerAPI.recordTimeToStatdD("user.post.time");
+
+            logger.info("exit create user api");
             if (u != null) {
                 return ResponseEntity.status(201).body(u.toJSON().toString());
             } else {
@@ -88,6 +88,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/self", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getUserInfo(@RequestHeader("Authorization") String auth) {
+        logger.info("enter get user api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.user.http.get");
 
@@ -102,6 +103,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/self", method = RequestMethod.PUT, consumes = "application/json")
     public ResponseEntity updateUserInfo(@RequestBody String modi, @RequestHeader("Authorization") String auth) {
+        logger.info("enter update user api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.user.http.put");
         JSONObject js = new JSONObject(new JSONTokener((new JSONObject(modi)).toString()));

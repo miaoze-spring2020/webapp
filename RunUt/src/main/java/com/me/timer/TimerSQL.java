@@ -15,6 +15,6 @@ public class TimerSQL extends StopWatch{
 
     @Override
     public void recordTimeToStatdD(String aspect) {
-        statsDClient.time("sql." + aspect, elapsedTime());
+        statsDClient.recordExecutionTime("sql." + aspect, elapsedTime());
     }
 }

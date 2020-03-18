@@ -8,6 +8,8 @@ import com.me.timer.TimerAPI;
 import com.me.utils.JSONUtils;
 import com.me.utils.S3Utils;
 import com.timgroup.statsd.StatsDClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -38,12 +40,15 @@ public class BillController {
     @Autowired
     private StatsDClient statsDClient;
 
+    private static final Logger logger = LogManager.getLogger(BillController.class);
+
     @Autowired
     @Qualifier("timerAPI")
     TimerAPI timerAPI;
 
     @RequestMapping(value = "/bill/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity createBill(@RequestBody String bill, @RequestHeader(value = "Authorization", required = false) String auth) {
+        logger.info("enter create bill api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.bill.http.post");
 
@@ -72,6 +77,7 @@ public class BillController {
 
     @RequestMapping(value = "/bills", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBills(@RequestHeader(value = "Authorization", required = false) String auth) {
+        logger.info("enter get bills api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.bills.http.get");
 
@@ -92,6 +98,7 @@ public class BillController {
 
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
+        logger.info("enter get bill api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.bill.http.get");
 
@@ -111,6 +118,7 @@ public class BillController {
 
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public ResponseEntity updateBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id, @RequestBody String modi) {
+        logger.info("enter update bill api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.bill.http.put");
         User u = ju.autherize(auth);
@@ -139,6 +147,7 @@ public class BillController {
 
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteBill(@RequestHeader(value = "Authorization", required = false) String auth, @PathVariable("id") String id) {
+        logger.info("enter delete bill api");
         statsDClient.incrementCounter("endpoint.bill.http.delete");
 
         timerAPI.recordTimeToStatdD("bill.delete.time");
