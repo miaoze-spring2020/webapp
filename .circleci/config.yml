@@ -29,12 +29,13 @@ jobs:
           working_directory: ~/project/RunUt
           command: mvn package
       - run:
-          name: move artifact and scripts appspec
+          name: move artifact and scripts appspec and cloudwatch configure file
           command: |
             mkdir ~/project/bundle
             mv ~/project/RunUt/target/webapp.jar ~/project/bundle
             mv ~/project/appspec.yml ~/project/bundle
             mv ~/project/scripts ~/project/bundle
+            mv ~/project/cloudwatch-config.json ~/project/bundle
       - run:
           name: install aws
           command: |
