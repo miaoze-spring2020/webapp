@@ -15,6 +15,6 @@ public class TimerS3 extends StopWatch {
 
     @Override
     public void recordTimeToStatdD(String aspect) {
-        statsDClient.time("s3." + aspect, elapsedTime());
+        statsDClient.recordExecutionTime("s3." + aspect, elapsedTime());
     }
 }

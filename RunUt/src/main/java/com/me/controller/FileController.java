@@ -9,6 +9,8 @@ import com.me.timer.TimerAPI;
 import com.me.utils.JSONUtils;
 import com.me.utils.S3Utils;
 import com.timgroup.statsd.StatsDClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +46,11 @@ public class FileController {
     @Qualifier("timerAPI")
     TimerAPI timerAPI;
 
+    private static final Logger logger = LogManager.getLogger(FileController.class);
+
     @RequestMapping(value = "/bill/{id}/file", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity createFile(@RequestHeader(name = "Authorization", required = false) String auth, @RequestParam(value = "file", required = false) MultipartFile file, @PathVariable("id") String id) {
+        logger.info("enter create file api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.file.http.post");
 
@@ -118,6 +123,7 @@ public class FileController {
 
     @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+        logger.info("enter get file api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.file.http.get");
         User u = ju.autherize(auth);
@@ -141,6 +147,7 @@ public class FileController {
 
     @RequestMapping(value = "/bill/{bid}/file/{fid}", method = RequestMethod.DELETE)
     public ResponseEntity deleteFile(@RequestHeader(name = "Authorization", required = false) String auth, @PathVariable("bid") String bid, @PathVariable("fid") String fid) {
+        logger.info("enter delete file api");
         timerAPI.start();
         statsDClient.incrementCounter("endpoint.file.http.delete");
 

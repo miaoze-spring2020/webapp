@@ -6,6 +6,10 @@ files:
   - source: ./cloudwatch-config.json
     destination: /tmp
 hooks:
+  ApplicationStop:
+    - location: scripts/stopapp.sh
+      timeout: 30
+      runas: ubuntu
   AfterInstall:
     - location: scripts/startcloudwatchagent.sh
       timeout: 30

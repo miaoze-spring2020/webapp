@@ -16,7 +16,7 @@ public class TimerAPI extends StopWatch {
 
     @Override
     public void recordTimeToStatdD(String aspect) {
-        statsDClient.time("endpoint." + aspect, elapsedTime());
+        statsDClient.recordExecutionTime("endpoint." + aspect, elapsedTime());
     }
 
 }
