@@ -12,7 +12,7 @@
                         "log_group_name": "csye6225",
                         "log_stream_name": "webapp",
                         "timestamp_format": "%H: %M: %S%y%b%-d",
-                        "timezone": "UTC"
+                        "timezone": "UTC-4"
                     }
                 ]
             }
