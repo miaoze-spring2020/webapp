@@ -23,9 +23,7 @@ public class S3Utils {
     @Qualifier("timerS3")
     TimerS3 timerS3;
 
-    @Autowired
-    @Qualifier("awsCredential")
-    static AWSCredential awsCredential;
+    static AWSCredential awsCredential = new AWSCredential();
 
     private static String bucketName = System.getenv("BUCKET_NAME");
     private static final String UPLOAD_DIR = "attached_files/";

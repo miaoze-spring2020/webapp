@@ -10,9 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Component("snsUtils")
 public class SNSUtils {
-    @Autowired
-    @Qualifier("awsCredential")
-    static AWSCredential awsCredential;
+
+    static AWSCredential awsCredential = new AWSCredential();
 
     private static String topicArn = System.getenv("TOPIC_ARN");
 

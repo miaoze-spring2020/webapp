@@ -16,9 +16,7 @@ import java.util.List;
 
 @Component("sqsUtils")
 public class SQSUtils {
-    @Autowired
-    @Qualifier("awsCredential")
-    static AWSCredential awsCredential;
+    static AWSCredential awsCredential = new AWSCredential();
 
     private static final String queueUrl = System.getenv("QUEUE_URL");
 
