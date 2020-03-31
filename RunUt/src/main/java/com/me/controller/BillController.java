@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -193,7 +194,17 @@ public class BillController {
             return ResponseEntity.status(400).body("invalid day number");
         }
         try {
-            pollingTask.post(u, xday);
+            LocalDate today = LocalDate.now();
+            LocalDate dueXDate = LocalDate.now().plusDays(xday);
+            List<Bill> bills = billDAO.getAllBillsTime(u, today, dueXDate);
+            JSONArray ja = new JSONArray();
+            for (Bill b : bills) {
+                ja.put(b.toJSON());
+            }
+            JSONObject messagejo = new JSONObject();
+            messagejo.put("username",u.getEmail_address());
+            messagejo.put("bills",ja);
+            pollingTask.post(messagejo.toString());
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Failed to send request to Amazon SQS");
         }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component("sqsUtils")
@@ -35,13 +36,17 @@ public class SQSUtils {
         sqs.sendMessage(send_msg_request);
     }
 
-    public String retrieveMessage() {
+    public List<String> retrieveMessage() {
 
         List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();
 
         if (messages.size() <= 0) return null;
-        Message message = messages.get(0);
-        sqs.deleteMessage(queueUrl, message.getReceiptHandle());
-        return message.getBody();
+        List<String> messagestr = new ArrayList<>();
+        for(Message m : messages){
+            sqs.deleteMessage(queueUrl, m.getReceiptHandle());
+            messagestr.add(m.getBody());
+        }
+
+        return messagestr;
     }
 }
