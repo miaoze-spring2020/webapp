@@ -2,7 +2,6 @@ package com.me.dao;
 
 import com.me.pojo.Bill;
 import com.me.pojo.User;
-import com.me.timer.TimerAPI;
 import com.me.timer.TimerSQL;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component("billDAO")
@@ -91,6 +91,27 @@ public class BillDAO extends DAO {
             begin();
             Criteria c = getSession().createCriteria(Bill.class);
             c.add(Restrictions.eq("owner", user));
+            List<Bill> bills = c.list();
+            commit();
+            timerSQL.recordTimeToStatdD("get.bills.success");
+            return bills;
+        } catch (HibernateException e) {
+            rollback();
+            e.printStackTrace();
+        }
+        timerSQL.recordTimeToStatdD("get.bills.fail");
+        return null;
+    }
+
+    public List<Bill> getAllBillsTime(User user, LocalDate from, LocalDate to) {
+        timerSQL.start();
+        try {
+            begin();
+            Criteria c = getSession().createCriteria(Bill.class);
+            c.add(Restrictions.eq("owner", user))
+                    .add(Restrictions.gt("due_date", from))
+                    .add(Restrictions.le("due_date", to));
+
             List<Bill> bills = c.list();
             commit();
             timerSQL.recordTimeToStatdD("get.bills.success");

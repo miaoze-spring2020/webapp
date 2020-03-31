@@ -6,6 +6,7 @@ import com.me.pojo.File;
 import com.me.pojo.User;
 import com.me.timer.TimerAPI;
 import com.me.utils.JSONUtils;
+import com.me.utils.PollingTask;
 import com.me.utils.S3Utils;
 import com.timgroup.statsd.StatsDClient;
 import org.apache.logging.log4j.LogManager;
@@ -18,11 +19,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/bill/", "/bill/*", "/bill*"})
+@RequestMapping({"/bill/**", "/bills/**"})
 public class BillController {
 
     @Autowired
@@ -36,6 +38,9 @@ public class BillController {
     @Autowired
     @Qualifier("s3Utils")
     S3Utils s3Utils;
+
+    @Autowired
+    PollingTask pollingTask;
 
     @Autowired
     private StatsDClient statsDClient;
@@ -169,5 +174,41 @@ public class BillController {
         billDAO.deleteBill(b);
         timerAPI.recordTimeToStatdD("bill.delete.time");
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/bills/due/{x}", method = RequestMethod.GET)
+    public ResponseEntity getDue(@PathVariable("x") String x, @RequestHeader(value = "Authorization", required = false) String auth) {
+        logger.info("enter get bills due api");
+        timerAPI.start();
+        statsDClient.incrementCounter("endpoint.bills.http.get.due");
+
+        User u = ju.autherize(auth);
+        if (u == null) {
+            timerAPI.recordTimeToStatdD("bills.get.time");
+            return ResponseEntity.status(401).body("unauthorized user");
+        }
+        long xday;
+        try {
+            xday = Long.parseLong(x);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("invalid day number");
+        }
+        try {
+            LocalDate today = LocalDate.now();
+            LocalDate dueXDate = LocalDate.now().plusDays(xday);
+            List<Bill> bills = billDAO.getAllBillsTime(u, today, dueXDate);
+            JSONArray ja = new JSONArray();
+            for (Bill b : bills) {
+                ja.put(b.toJSON());
+            }
+            JSONObject messagejo = new JSONObject();
+            messagejo.put("username",u.getEmail_address());
+            messagejo.put("bills",ja);
+            pollingTask.post(messagejo.toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Failed to send request to Amazon SQS");
+        }
+        timerAPI.recordTimeToStatdD("bills.get.due.time");
+        return ResponseEntity.ok().body("The bills are sent to this email address: " + u.getEmail_address());
     }
 }
