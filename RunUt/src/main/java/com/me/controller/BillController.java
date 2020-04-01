@@ -190,6 +190,9 @@ public class BillController {
         long xday;
         try {
             xday = Long.parseLong(x);
+            if(xday <= 0){
+                return ResponseEntity.status(400).body("number must be greater than 0");
+            }
         } catch (Exception e) {
             return ResponseEntity.status(400).body("invalid day number");
         }
