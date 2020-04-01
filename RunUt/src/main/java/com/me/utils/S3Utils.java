@@ -23,14 +23,17 @@ public class S3Utils {
     @Qualifier("timerS3")
     TimerS3 timerS3;
 
-    private String accessKey = System.getenv("AWS_ACCESS_KEY");
-    //    private String accessKey = "AKIAJ7VVI7PF3IZCOYDQ";
-    private String secretKey = System.getenv("AWS_SECRET_KEY");
-    //    private String secretKey = "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";
-    private String bucketName = System.getenv("BUCKET_NAME");
-    //    private String bucketName = "ass6test10000-mys3bucket-1296uof2jlx4n";
-    private String region = System.getenv("AWS_REGION");
+    static AWSCredential awsCredential = new AWSCredential();
+
+    private static String bucketName = System.getenv("BUCKET_NAME");
     private static final String UPLOAD_DIR = "attached_files/";
+
+    private static AmazonS3 s3client = AmazonS3ClientBuilder
+            .standard()
+            .withCredentials(new AWSStaticCredentialsProvider(awsCredential.getCredentials()))
+            .withRegion(awsCredential.getRegion())
+            .withForceGlobalBucketAccessEnabled(true)
+            .build();
 
 
     /**
@@ -39,14 +42,6 @@ public class S3Utils {
      */
     public String uploadFile(String uniqueFileName, MultipartFile file) throws IOException {
         timerS3.start();
-        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-
-        AmazonS3 s3client = AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(region)
-                .withForceGlobalBucketAccessEnabled(true)
-                .build();
 
         //create bucket
         if (!s3client.doesBucketExist(bucketName)) {
@@ -72,13 +67,6 @@ public class S3Utils {
 
     public void deleteFile(String uniqueFileName) {
         timerS3.start();
-        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-
-        AmazonS3 s3client = AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(region)
-                .build();
 
         s3client.deleteObject(bucketName, UPLOAD_DIR + uniqueFileName);
         timerS3.recordTimeToStatdD("delete.file.success");
